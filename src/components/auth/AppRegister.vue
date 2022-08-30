@@ -23,6 +23,7 @@
                     <div class="text-center mt-5">
                         <button 
                           class="rounded-full bg-black text-white text-bold flex border-2 items-center text-sm px-10 justify-between uppercase"
+                          @click="continueWithGmail"
                         >
                             <img src="../../assets/images/gmail.png" class="gmail_img" alt="gmail">
                             <span>continue with gmail</span>

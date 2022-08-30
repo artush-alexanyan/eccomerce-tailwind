@@ -5,7 +5,8 @@ const authStatus = {
         userDetails: {
             userName: '',
             email: '',
-            photo: ''
+            photo: '',
+            isUserInfoShown: false
         },     
         isUserSigned: false,
         defaultPhoto: require('../../../assets/images/unknown.jpg'),      
@@ -25,17 +26,7 @@ const authStatus = {
                   console.log('No user signed in')
                 }
               });            
-        },
-        UserSignOut () {
-            firebase
-                .auth()
-                .signOut()
-                .then(() => {
-                    console.log("Successfuly signed out")
-                    this.$router.push({ name: 'AppLogin' })
-            })
-            .catch(err => console.log('Error during signout!', err))
-        }        
+        }     
     },
     created(){
         this.checkUserStatus()
