@@ -18,10 +18,10 @@
             </div>            
         </div>       
 
-        <div class="main flex">
-            <div class="sidebar h-screen border-r-2 m-2 border-gray-100 shadow-lg w-1/5 bg-gray-300" v-show="showSidebar">
+        <div class="main lg:flex">
+            <div class="sidebar h-screen border-r-2 m-2 border-gray-100 shadow-lg w-full lg:w-1/5 bg-gray-300" v-show="showSidebar">
                 <transition name="toggle-user-info">
-                    <div class="user-info flex justify-center ml-3 mt-3 align-center" v-if="showUserInfo">
+                    <div class="user-info flex justify-center ml-3 pt-3 mt-3 align-center" v-if="showUserInfo">
                         <div class="max-w-sm rounded-xl overflow-hidden shadow-xl bg-white">
                         <img 
                             class="rounded-full mx-auto mt-3 h-32 w-32" 
@@ -47,8 +47,30 @@
 
             <div 
                 class="content h-screen m-2 border-gray-100 shadow-lg bg-gray-200"
-                :class="showSidebar == true ? 'w-4/5' : 'w-full' "
+                :class="showSidebar == true ? 'lg:w-4/5 w-full' : 'w-full' "
             >
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
+                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
 
             </div>           
         </div>     

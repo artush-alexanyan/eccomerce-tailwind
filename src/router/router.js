@@ -7,7 +7,7 @@ const router = new VueRouter({
     mode: "history",
     routes: [
         {
-            path: "/login",
+            path: "/",
             name: "AppLogin",
             component: () => import('../components/auth/AppLogin.vue')
         },
