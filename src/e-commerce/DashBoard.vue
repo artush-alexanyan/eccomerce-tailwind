@@ -2,17 +2,17 @@
     <div class="dashboard">
         <div class="flex justify-center items-center py-5 shadow-xl bg-gray-100">
             <div class="lg:mx-20 md:mx-10 mx-8">
-                <button class="px-7 py-3 text-2xl text-black" @click="showSidebar = !showSidebar">
+                <button class="px-7 py-1 text-2xl text-black" @click="showSidebar = !showSidebar">
                     <font-awesome-icon icon="fa-solid fa-bars" />
                 </button>
             </div>
             <div class="lg:mx-20 md:mx-10 mx-8">
-                <button class="px-7 py-3 text-2xl text-black" @click="showUserInfo = !showUserInfo">
+                <button class="px-7 py-1 text-2xl text-black" @click="showUserInfo = !showUserInfo">
                     <font-awesome-icon icon="fa-solid fa-user" />
                 </button>
             </div>
             <div class="lg:mx-20 md:mx-10 mx-8">
-                <button class="px-7 py-3 text-2xl text-black">
+                <button class="px-7 py-1 text-2xl text-black">
                     <font-awesome-icon icon="fa-solid fa-message" />
                 </button>
             </div>            
@@ -21,19 +21,19 @@
         <div class="main lg:flex">
             <div class="sidebar h-screen border-r-2 m-2 border-gray-100 shadow-lg w-full lg:w-1/5 bg-gray-300" v-show="showSidebar">
                 <transition name="toggle-user-info">
-                    <div class="user-info flex justify-center ml-3 pt-3 mt-3 align-center" v-if="showUserInfo">
-                        <div class="max-w-sm rounded-xl overflow-hidden shadow-xl bg-white">
+                    <div class="user-info flex justify-center pt-3 mt-3 align-center" v-if="showUserInfo">
+                        <div class="rounded-xl overflow-hidden shadow-xl bg-white">
                         <img 
-                            class="rounded-full mx-auto mt-3 h-32 w-32" 
+                            class="rounded-full mx-auto mt-3 h-16 w-16" 
                             :src="`${isUserSigned == false ? defaultPhoto : userDetails.photo}`" 
                             alt="User avatar"
                         >
-                        <div class="px-6 py-4 text-center">
+                        <div class="px-3 py-4 text-center">
                             <div 
-                                class="font-bold text-xl mb-2">
+                                class="font-bold text-md mb-2">
                                     {{ isUserSigned == false ? "No user signed in" : userDetails.userName }} 
                                 </div>
-                            <p class="text-gray-700 text-base">
+                            <p class="text-gray-700 text-sm">
                             {{ userDetails.email }}
                             </p>
                         </div>
@@ -61,17 +61,6 @@
                 <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
                 <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
                 <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
-                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
-                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
-                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
-                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
-                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
-                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
-                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
-                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
-                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
-                <h1 class="text-center py-2">Lorem ipsum dolor sit.</h1>
-
             </div>           
         </div>     
     </div>

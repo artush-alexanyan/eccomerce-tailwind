@@ -1,6 +1,6 @@
 <template>
     <div 
-        class="flex justify-between items-center border-b fixed top-0 w-full shadow-xl py-5" 
+        class="flex justify-between items-center border-b fixed top-0 w-full shadow-xl py-2" 
         v-show="isUserSigned == false"
     >
         <div class="flex jutify-between items-center ml-10 w-50">
