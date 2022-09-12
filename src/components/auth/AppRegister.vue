@@ -18,7 +18,7 @@
                       <button class="mt-5 rounded-full px-10 py-3 border text-white bg-blue-500">Login</button>                        
                     </form>
                     <p class="mt-6">
-                      Already have an account, please <router-link to="/login" class="text-blue-500">login</router-link>
+                      Already have an account, please <router-link to="/" class="text-blue-500">login</router-link>
                     </p>
                     <div class="text-center mt-5">
                         <button 

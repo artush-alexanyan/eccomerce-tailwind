@@ -29,7 +29,7 @@
             <button 
                 class="px-5 rounded-full border-0 text-white bg-blue-500  py-2.5 font-bold text-md mx-3"
             >
-                <router-link to="/login">Login</router-link>
+                <router-link to="/">Login</router-link>
             </button>
             <button 
                 class="px-5 rounded-full border-0 text-white bg-black  py-2.5 font-bold text-md mx-3"
