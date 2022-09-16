@@ -20,7 +20,12 @@ const router = new VueRouter({
             path: "/user-dashboard",
             name: "DashBoard",
             component: () => import('../e-commerce/DashBoard.vue')
-        }                 
+        }  ,
+        {
+            path: "/user/me",
+            name: "UserHomePage",
+            component: () => import('../e-commerce/user/UserHomePage.vue')
+        }                         
 
     ]
 })
