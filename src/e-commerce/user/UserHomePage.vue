@@ -32,7 +32,7 @@
                     <p class="text-gray-600 font-bold">358 friends</p>
                     <div class="lg:flex lg:justify-between grid lg:w-[39rem]">
                         <div class="flex justify-center items-center">
-                            <div class="friends" v-for="img in 8" :key="img">
+                            <div class="friends md:block hidden" v-for="img in 8" :key="img">
                                 <img 
                                     :src="userDetails.photo" 
                                     class="h-8 w-8 rounded-full shadow-lg ml-[-0.25rem]" 
@@ -42,13 +42,16 @@
                         </div>
                         <div class="flex justify-center mt-3 items-center">
                             <button class="rounded bg-blue-500 text-white py-[0.25rem] px-2 flex items-center jutify-between shadow-lg">
-                                <font-awesome-icon icon="fa-solid fa-camera" />
+                                <font-awesome-icon icon="fa-solid fa-plus" />
                                 <p class="font-bold text-base ml-1">Add to story</p>
                             </button>  
-                            <button class="rounded ml-3 bg-white py-[0.25rem] px-2 flex items-center jutify-between shadow-lg">
-                                <font-awesome-icon icon="fa-solid fa-camera" />
-                                <p class="font-bold text-base ml-1">Edit profil</p>
-                            </button>                                                         
+                            <button class="rounded ml-3 bg-gray-200 py-[0.25rem] px-2 flex items-center jutify-between shadow-lg">
+                                <font-awesome-icon icon="fa-solid fa-pencil" />
+                                <p class="font-bold text-base ml-1">Edit profile</p>
+                            </button>         
+                            <button class="rounded ml-3 bg-gray-200 py-[0.25rem] px-2 flex items-center jutify-between shadow-lg md:hidden block">
+                                <font-awesome-icon icon="fa-solid fa-ellipsis" />
+                            </button>                                                                                
                         </div>
                     </div>                    
                 </div>

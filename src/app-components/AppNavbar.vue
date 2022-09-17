@@ -75,195 +75,145 @@
                 </div>                 
             </div>
             <div class="flex">
-
-            <div class="relative mx-2" >
-            <button class="rounded-full border-2 h-10 w-10 bg-gray-200 lg:block hidden">
-                <font-awesome-icon icon="fa-solid fa-bars" />
-            </button>
-                <div class="absolute right-0 w-96 mt-5 hidden">
-                <transition name="toggle-user-info">
-                    <div v-if="showUserInfo" class="bg-white shadow-xl rounded py-2 border border-gray-200">
-                        <ul>
-                            <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
-                                    <font-awesome-icon icon="fa-solid fa-message" />
-                                </div>
-                                <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                            </li>
-                            <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
-                                    <font-awesome-icon icon="fa-solid fa-message" />
-                                </div>
-                                <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                            </li>
-                            <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
-                                    <font-awesome-icon icon="fa-solid fa-message" />
-                                </div>
-                                <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                            </li>
-                            <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
-                                    <font-awesome-icon icon="fa-solid fa-message" />
-                                </div>
-                                <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                            </li>
-                            <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
-                                    <font-awesome-icon icon="fa-solid fa-message" />
-                                </div>
-                                <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                            </li>                                                                                                                                          
-                        </ul>
-                        <div class="text-center my-3">
-                            <AppSignOutButton />
-                        </div>                          
+                <div class="relative mx-2" >
+                <button class="rounded-full border-2 h-10 w-10 bg-gray-200 lg:block hidden">
+                    <font-awesome-icon icon="fa-solid fa-bars" />
+                </button>
+                    <div class="absolute right-0 w-96 mt-5 hidden">
+                    <transition name="toggle-user-info">
+                        <div v-if="showUserInfo" class="bg-white shadow-xl rounded py-2 border border-gray-200">
+                            <ul>
+                                <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
+                                    <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
+                                        <font-awesome-icon icon="fa-solid fa-message" />
+                                    </div>
+                                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
+                                </li>
+                                <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
+                                    <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
+                                        <font-awesome-icon icon="fa-solid fa-message" />
+                                    </div>
+                                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
+                                </li>
+                                <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
+                                    <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
+                                        <font-awesome-icon icon="fa-solid fa-message" />
+                                    </div>
+                                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
+                                </li>
+                                <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
+                                    <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
+                                        <font-awesome-icon icon="fa-solid fa-message" />
+                                    </div>
+                                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
+                                </li>
+                                <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
+                                    <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
+                                        <font-awesome-icon icon="fa-solid fa-message" />
+                                    </div>
+                                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
+                                </li>                                                                                                                                          
+                            </ul>
+                            <div class="text-center my-3">
+                                <AppSignOutButton />
+                            </div>                          
+                        </div>
+                    </transition>
                     </div>
-                </transition>
-                </div>
-            </div> 
-            <div class="relative mx-2" >
-            <button class="rounded-full border-2 h-10 w-10 bg-gray-200 lg:block hidden">
-                 <font-awesome-icon icon="fa-solid fa-message" />
-            </button>
-                <div class="absolute right-0 w-96 mt-5 hidden">
-                <transition name="toggle-user-info">
-                    <div v-if="showUserInfo" class="bg-white shadow-xl rounded py-2 border border-gray-200">
-                        <ul>
-                            <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
-                                    <font-awesome-icon icon="fa-solid fa-message" />
-                                </div>
-                                <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                            </li>
-                            <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
-                                    <font-awesome-icon icon="fa-solid fa-message" />
-                                </div>
-                                <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                            </li>
-                            <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
-                                    <font-awesome-icon icon="fa-solid fa-message" />
-                                </div>
-                                <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                            </li>
-                            <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
-                                    <font-awesome-icon icon="fa-solid fa-message" />
-                                </div>
-                                <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                            </li>
-                            <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
-                                    <font-awesome-icon icon="fa-solid fa-message" />
-                                </div>
-                                <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                            </li>                                                                                                                                          
-                        </ul>
-                        <div class="text-center my-3">
-                            <AppSignOutButton />
-                        </div>                          
+                </div> 
+                <div class="relative mx-2" >
+                <button class="rounded-full border-2 h-10 w-10 bg-gray-200 lg:block hidden">
+                    <font-awesome-icon icon="fa-solid fa-message" />
+                </button>
+                    <div class="absolute right-0 w-96 mt-5 hidden">
+                    <transition name="toggle-user-info">
+                        <div v-if="showUserInfo" class="bg-white shadow-xl rounded py-2 border border-gray-200">
+                            <ul>
+                                <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
+                                    <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
+                                        <font-awesome-icon icon="fa-solid fa-message" />
+                                    </div>
+                                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
+                                </li>
+                                <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
+                                    <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
+                                        <font-awesome-icon icon="fa-solid fa-message" />
+                                    </div>
+                                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
+                                </li>
+                                <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
+                                    <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
+                                        <font-awesome-icon icon="fa-solid fa-message" />
+                                    </div>
+                                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
+                                </li>
+                                <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
+                                    <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
+                                        <font-awesome-icon icon="fa-solid fa-message" />
+                                    </div>
+                                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
+                                </li>
+                                <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
+                                    <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
+                                        <font-awesome-icon icon="fa-solid fa-message" />
+                                    </div>
+                                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
+                                </li>                                                                                                                                          
+                            </ul>
+                            <div class="text-center my-3">
+                                <AppSignOutButton />
+                            </div>                          
+                        </div>
+                    </transition>
                     </div>
-                </transition>
-                </div>
-            </div>              
-            <div class="relative mx-2" >
-            <button class="rounded-full border-2 h-10 w-10 bg-gray-200 lg:block hidden">
-                <font-awesome-icon icon="fa-solid fa-bell" />
-            </button>
-                <div class="absolute right-0 w-96 mt-5 hidden">
-                <transition name="toggle-user-info">
-                    <div v-if="showUserInfo" class="bg-white shadow-xl rounded py-2 border border-gray-200">
-                        <ul>
-                            <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
-                                    <font-awesome-icon icon="fa-solid fa-message" />
-                                </div>
-                                <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                            </li>
-                            <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
-                                    <font-awesome-icon icon="fa-solid fa-message" />
-                                </div>
-                                <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                            </li>
-                            <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
-                                    <font-awesome-icon icon="fa-solid fa-message" />
-                                </div>
-                                <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                            </li>
-                            <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
-                                    <font-awesome-icon icon="fa-solid fa-message" />
-                                </div>
-                                <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                            </li>
-                            <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
-                                    <font-awesome-icon icon="fa-solid fa-message" />
-                                </div>
-                                <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                            </li>                                                                                                                                          
-                        </ul>
-                        <div class="text-center my-3">
-                            <AppSignOutButton />
-                        </div>                          
+                </div>              
+                <div class="relative mx-2" >
+                <button class="rounded-full border-2 h-10 w-10 bg-gray-200 lg:block hidden">
+                    <font-awesome-icon icon="fa-solid fa-bell" />
+                </button>
+                    <div class="absolute right-0 w-96 mt-5 hidden">
+                    <transition name="toggle-user-info">
+                        <div v-if="showUserInfo" class="bg-white shadow-xl rounded py-2 border border-gray-200">
+                            <ul>
+                                <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
+                                    <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
+                                        <font-awesome-icon icon="fa-solid fa-message" />
+                                    </div>
+                                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
+                                </li>
+                                <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
+                                    <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
+                                        <font-awesome-icon icon="fa-solid fa-message" />
+                                    </div>
+                                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
+                                </li>
+                                <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
+                                    <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
+                                        <font-awesome-icon icon="fa-solid fa-message" />
+                                    </div>
+                                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
+                                </li>
+                                <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
+                                    <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
+                                        <font-awesome-icon icon="fa-solid fa-message" />
+                                    </div>
+                                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
+                                </li>
+                                <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
+                                    <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
+                                        <font-awesome-icon icon="fa-solid fa-message" />
+                                    </div>
+                                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
+                                </li>                                                                                                                                          
+                            </ul>
+                            <div class="text-center my-3">
+                                <AppSignOutButton />
+                            </div>                          
+                        </div>
+                    </transition>
                     </div>
-                </transition>
-                </div>
-            </div>  
-            <div class="relative mx-2" >
-            <button class="rounded-full h-10 w-10 bg-gray-200 flex justify-center items-center" @click="showUserInfo = !showUserInfo">
-                <img 
-                    class="rounded-full h-10 w-10" 
-                    :src="`${isUserSigned == false ? defaultPhoto : userDetails.photo}`" 
-                    alt="User avatar"
-                >                
-            </button>
-                <div class="absolute flex justify-center right-0 md:w-80 w-52 mt-5">
-                <transition name="toggle-user-info">
-                    <div v-if="showUserInfo" class="bg-white  shadow-xl rounded-lg py-2 border border-gray-200">
-                        <ul>
-                            <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
-                                    <font-awesome-icon icon="fa-solid fa-message" />
-                                </div>
-                                <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                            </li>
-                            <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
-                                    <font-awesome-icon icon="fa-solid fa-message" />
-                                </div>
-                                <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                            </li>
-                            <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
-                                    <font-awesome-icon icon="fa-solid fa-message" />
-                                </div>
-                                <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                            </li>
-                            <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
-                                    <font-awesome-icon icon="fa-solid fa-message" />
-                                </div>
-                                <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                            </li>
-                            <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
-                                    <font-awesome-icon icon="fa-solid fa-message" />
-                                </div>
-                                <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                            </li>                                                                                                                                          
-                        </ul>
-                        <div class="text-center my-3">
-                            <AppSignOutButton />
-                        </div>                          
-                    </div>
-                </transition>
-                </div>
-            </div>                                                
+                </div>       
+                <NavAvatarBtn />                                      
             </div>
         </div>             
     </div>
@@ -271,13 +221,13 @@
 
 <script>
 import UserStatus from '../components/auth/mixins/authStatusCheck'
-import AppSignOutButton from './AppSignOutButton.vue'
+import NavAvatarBtn from './NavAvatarBtn.vue'
 export default {
     name: 'AppNavbar',
+    components: { NavAvatarBtn },
     mixins: [ UserStatus ],
-    components: { AppSignOutButton },
     data: () => ({
-        showUserInfo: false,
+        
     })
 }
 </script>

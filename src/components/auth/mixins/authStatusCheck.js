@@ -23,7 +23,7 @@ const authStatus = {
                   this.userDetails.photo = user.photoURL
                 } else {
                     this.isUserSigned = false
-                  console.log('No user signed in')
+                    console.log('User is signed out')
                 }
               });            
         }     
