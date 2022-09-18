@@ -5,7 +5,8 @@ const auth = {
         user: {
             email: 'Artush',
             password: 'password'
-        }        
+        },
+        loading: false        
     }),
     methods: {
         continueWithGmail (){
@@ -16,7 +17,11 @@ const auth = {
             .then((result) => {
                 let user = result.user;
                 console.log("Successfuly signed in! ",user) // User that was authenticated
-                this.$router.push({name: "DashBoard"})
+                this.loading = true
+                setTimeout(() => {
+                    this.loading = false
+                    this.$router.push({name: "DashBoard"})                    
+                }, 4000)
             })
             .catch((err) => {
                 console.log(err); // This will give you all the information needed to further debug any errors

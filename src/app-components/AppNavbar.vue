@@ -81,7 +81,7 @@
                 </button>
                     <div class="absolute right-0 w-96 mt-5 hidden">
                     <transition name="toggle-user-info">
-                        <div v-if="showUserInfo" class="bg-white shadow-xl rounded py-2 border border-gray-200">
+                        <div  class="bg-white shadow-xl rounded py-2 border border-gray-200">
                             <ul>
                                 <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
                                     <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
@@ -115,7 +115,7 @@
                                 </li>                                                                                                                                          
                             </ul>
                             <div class="text-center my-3">
-                                <AppSignOutButton />
+                                
                             </div>                          
                         </div>
                     </transition>
@@ -127,7 +127,7 @@
                 </button>
                     <div class="absolute right-0 w-96 mt-5 hidden">
                     <transition name="toggle-user-info">
-                        <div v-if="showUserInfo" class="bg-white shadow-xl rounded py-2 border border-gray-200">
+                        <div  class="bg-white shadow-xl rounded py-2 border border-gray-200">
                             <ul>
                                 <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
                                     <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
@@ -161,7 +161,7 @@
                                 </li>                                                                                                                                          
                             </ul>
                             <div class="text-center my-3">
-                                <AppSignOutButton />
+                                
                             </div>                          
                         </div>
                     </transition>
@@ -173,7 +173,7 @@
                 </button>
                     <div class="absolute right-0 w-96 mt-5 hidden">
                     <transition name="toggle-user-info">
-                        <div v-if="showUserInfo" class="bg-white shadow-xl rounded py-2 border border-gray-200">
+                        <div  class="bg-white shadow-xl rounded py-2 border border-gray-200">
                             <ul>
                                 <li class="flex justify-start items-center py-3 px-3 cursor-pointer">
                                     <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
@@ -207,7 +207,7 @@
                                 </li>                                                                                                                                          
                             </ul>
                             <div class="text-center my-3">
-                                <AppSignOutButton />
+                                
                             </div>                          
                         </div>
                     </transition>

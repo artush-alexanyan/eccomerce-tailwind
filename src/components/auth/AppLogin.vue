@@ -1,6 +1,9 @@
 <template>
     <div class="login">
-        <div class="w-full h-screen">
+        <div v-if="loading">
+          <AppLoader />
+        </div>
+        <div class="w-full h-screen" v-else>
             <div class="flex h-full justify-center items-center">
                 <div class="card border rounded-3xl px-10 py-5 shadow-2xl rounded-0 text-center">
                     <h1 class="text-center text-blue-500 text-2xl my-6">Login</h1>
@@ -37,9 +40,12 @@
 
 <script>
 import Auth from './mixins/auth'
+import AppLoader from '../../app-components/AppLoader.vue'
+
 export default {
     name: 'AppRegister',
     mixins: [Auth],
+    components: { AppLoader },
     data: () => ({
 
     }),

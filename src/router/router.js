@@ -25,6 +25,11 @@ const router = new VueRouter({
             path: "/user/me",
             name: "UserHomePage",
             component: () => import('../e-commerce/user/UserHomePage.vue')
+        },
+        {
+            path: '/loader',
+            name: 'AppLoader',
+            component: () => import('../app-components/AppLoader.vue')
         }                         
 
     ]

@@ -1,19 +1,29 @@
 <template>
     <div class="sign-out">
-        <button 
-            class="px-5 rounded-full border-0 text-white bg-blue-500  py-2.5 font-bold text-md mx-3"
+        <li 
+            class="flex justify-start items-center md:py-3 px-3 cursor-pointer" 
             @click="UserSignOut"
         >
-            Sign out
-        </button>    
+            <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
+                <font-awesome-icon 
+                    icon="fa-solid fa-right-from-bracket" 
+                    class="font-semibold text-xl"
+                />
+            </div>
+            <p class="text-sm font-semybold mx-3">
+                Log out
+            </p>
+        </li>
     </div>       
 </template>
 
 <script>
 import firebase from '../firebase/firebase'
+import UserStatus from '../components/auth/mixins/authStatusCheck'
 
 export default {
     name: 'AppSignOutButton',
+    mixins: [ UserStatus ],
     data: () => ({
 
     }),
@@ -24,6 +34,7 @@ export default {
                 .signOut()
                 .then(() => {
                     console.log("Successfuly signed out")
+                    this.showUserInfo = false
                     this.$router.push({ name: 'AppLogin' })
             })
             .catch(err => console.log('Error during signout!', err))
