@@ -25,7 +25,7 @@
                             </div>                        </router-link>
                         <ul class="mt-5">
                             <li 
-                                class="flex justify-start items-center md:py-3 px-3 cursor-pointer" 
+                                class="flex justify-start items-center py-3 px-3 cursor-pointer" 
                                 v-for="item in dropdownItems" 
                                 :key="item.title"
                                 @click="showUserInfo = flase"

@@ -30,8 +30,13 @@ const router = new VueRouter({
             path: '/loader',
             name: 'AppLoader',
             component: () => import('../app-components/AppLoader.vue')
-        }                         
+        },                        
+        {
+            path: '/user-stories/:id',
+            name: 'StoryView',
+            component: () => import('../e-commerce/content/StoryView.vue') ,
 
+        }
     ]
 })
 
