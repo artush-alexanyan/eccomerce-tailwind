@@ -4,11 +4,11 @@
         <div class="flex md:justify-between items-center my-4">
             <button 
                 type="button" 
-                class="rounded-full md:p-3 p-1 bg-gray-200 border flex justify-center items-center ml-2 md:ml-5" 
+                class="rounded-full md:h-10 md:w-10 bg-gray-200 border flex justify-center items-center ml-2 md:ml-5" 
                 :class="page === 0 ? 'hidden' : ''"
                 @click="previoustStory"
             >
-                <font-awesome-icon icon="fa-solid fa-arrow-left-long" class="text-gray-400" />
+                <font-awesome-icon icon="fa-solid fa-chevron-left" class="text-gray-400" />
             </button>                    
             <div 
                 class="card mx-2 relative" 
@@ -26,11 +26,11 @@
             </div>
             <button 
                 type="button" 
-                class="rounded-full md:p-3 p-1 bg-gray-200 border flex justify-center items-center mr-2 md:mr-5" 
+                class="rounded-full md:h-10 md:w-10 h-7 w-7 bg-gray-200 border flex justify-center items-center mr-2 md:mr-5" 
                 :class="nextPageIconHide ? 'hidden' : ''"
                 @click="nextStory"
             >
-                <font-awesome-icon icon="fa-solid fa-arrow-right-long"  class="text-gray-400" />
+                <font-awesome-icon icon="fa-solid fa-chevron-right"  class="text-gray-400" />
             </button>                        
         </div>    
         <h1 class="m-10 text-4"> {{ $route.params.id }} </h1> 

@@ -26,17 +26,18 @@
                     </div>
                 </div>
                 <h5 class="mt-4 ml-4 font-bold text-lg ">All Stories</h5>
-                <ul class="ml-4 story-items h-5/6">
+                <ul class="ml-4 story-items h-full mb-24">
                     <li 
                         class="flex items-center justify-start mt-4" 
+                        :class="currentItemId === index ? 'bg-gray-100 rounded-full' : ''"
                         v-for="(story, index) in storyItems" 
                         :key="story.info"
-                        @click="changeStory(index)"
+                        @click="changeStorySidebar(index)"
                     >
-                        <div class="img-wrapper border-4 border-blue-600 rounded-full cursor-pointer">
+                        <div class="img-wrapper border-[3px] border-blue-600 rounded-full cursor-pointer p-[0.125rem]">
                             <img 
                                 :src="story.img" 
-                                class="h-16 w-16 rounded-full" 
+                                class="xl:h-16 xl:w-16 md:h-10 md:w-10 rounded-full" 
                                 :alt="'Story item' + story.info"
                             >
                         </div>
@@ -56,6 +57,24 @@
                             <h4 class="ml-2"> {{ currentStoryTitle }} </h4>                            
                         </div>
                     </div>
+                    <div class="absolute top-[25rem] right-0">
+                        <button 
+                            class="h-12 w-12 rounded-full bg-gray-100  shadow-lg" 
+                            :class="currentItemId === storyItems.length - 1 ? 'hidden' : ''" 
+                            @click="changeStoryNext"
+                        >
+                            <font-awesome-icon icon="fa-solid fa-chevron-right" />
+                        </button>
+                    </div>
+                    <div class="absolute top-[25rem] left-0">
+                        <button 
+                            class="h-12 w-12 rounded-full bg-gray-100  shadow-lg" 
+                            :class="currentItemId === 0 ? 'hidden' : ''" 
+                            @click="changeStoryPrevious"
+                        >
+                            <font-awesome-icon icon="fa-solid fa-chevron-left" />
+                        </button>
+                    </div>                    
                     <div class="flex items-center mt-2">
                         <input type="text" class="rounded-3xl md:py-2 md:px-10 px-1 w-30 ml-4 md:w-full bg-black border-2 border-white">
                         <div class="smiles flex mr-4 ml-3">
@@ -74,6 +93,7 @@ import UserStatus from '../../components/auth/mixins/authStatusCheck'
 export default {
     name: 'StoryView',
     mixins: [ UserStatus ],
+    page: 0,
     data: () => ({
         storyItems: [
             { id: 0, img: require("../../assets/images/storyes/story-1.jpg"), info: 'Hovhannes Shiraz'},
@@ -91,7 +111,8 @@ export default {
             { id: 12, img: require("../../assets/images/storyes/story-13.png"), info: 'Aqsel Bakunts'},            
         ],
         currentStoryImg: '',
-        currentStoryTitle: ''         
+        currentStoryTitle: '',         
+        currentItemId: null,
     }),
     methods: {
         getStoryItem () {
@@ -100,17 +121,33 @@ export default {
                 if(item.info === this.$route.params.id){
                     this.currentStoryImg = item.img
                     this.currentStoryTitle = item.info
+                    this.currentItemId = item.id
                 }
             })
         },
-        changeStory (index) {
+        changeStorySidebar (index) {
             this.storyItems.map((item, ind) => {
                 if(index === ind) {
                     this.currentStoryImg = this.storyItems[index].img
                     this.currentStoryTitle = this.storyItems[index].info
+                    this.currentItemId = this.storyItems[index].id
                 }
             })
-        }
+        },
+        changeStoryNext () {
+            if(this.currentItemId < this.storyItems.length){
+                this.currentItemId++
+                this.currentStoryImg = this.storyItems[this.currentItemId].img
+                this.currentStoryTitle = this.storyItems[this.currentItemId].info                
+            }
+        },
+        changeStoryPrevious () {
+            if(this.currentItemId > 0){
+                this.currentItemId--
+                this.currentStoryImg = this.storyItems[this.currentItemId].img
+                this.currentStoryTitle = this.storyItems[this.currentItemId].info                
+            }
+        }        
     },
 beforeRouteEnter (to, from, next) { 
   next(vm => { 
