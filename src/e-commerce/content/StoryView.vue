@@ -1,10 +1,10 @@
 <template>
-    <div class="story-view">
-        <div class="story-view bg-white flex">
-            <div class="story-sidebar w-1/5 h-screen border-gray-400 border-r bg-white hidden lg:block">
+    <div class="story-view fixed top-0 w-full">
+        <div class="story-view bg-white flex h-screen">
+            <div class="story-sidebar w-1/5 h-5/6 border-gray-400 border-r bg-white hidden lg:block">
                 <div class="flex justify-start items-center">
                     <router-link to="/user-dashboard">
-                        <button class="rounded-full p-3 flex items-center justify-center bg-gray-400 ml-4 mt-5">
+                        <button class="rounded-full h-10 w-10 flex items-center justify-center bg-gray-400 ml-4 mt-5">
                             <font-awesome-icon icon="fa-solid fa-xmark" class="text-xl text-white" />
                         </button>                        
                     </router-link>
@@ -16,21 +16,50 @@
                     <router-link to="/settings">Settings</router-link>
                 </div>
                 <h5 class="mt-4 ml-4 font-bold text-lg ">Your story</h5>
-                <h5 class="mt-4 ml-4 font-bold text-lg "> {{ $route.params.id }} </h5>
+                <div class="flex items-center justify-start mt-4">
+                    <button class="rounded-full h-20 w-20 flex items-center justify-center  ml-4 bg-gray-200">
+                        <font-awesome-icon icon="fa-solid fa-plus" class="text-blue-400" />
+                    </button>
+                    <div class="ml-4">
+                        <h6 class="font-semibold text-md">Create story</h6>
+                        <p class="text-sm">Share a photo or write something</p>                        
+                    </div>
+                </div>
+                <h5 class="mt-4 ml-4 font-bold text-lg ">All Stories</h5>
+                <ul class="ml-4 story-items h-5/6">
+                    <li 
+                        class="flex items-center justify-start mt-4" 
+                        v-for="(story, index) in storyItems" 
+                        :key="story.info"
+                        @click="changeStory(index)"
+                    >
+                        <div class="img-wrapper border-4 border-blue-600 rounded-full cursor-pointer">
+                            <img 
+                                :src="story.img" 
+                                class="h-16 w-16 rounded-full" 
+                                :alt="'Story item' + story.info"
+                            >
+                        </div>
+                        <div class="ml-4">
+                            <h6 class="font-semibold text-md"> {{ story.info }} </h6>
+                            <p class="text-sm text-blue-400">Share a photo or write something</p>                        
+                        </div>                        
+                    </li>
+                </ul>
             </div>
-           <div class="content h-screen w-full lg:w-4/5 bg-black border-4 flex justify-center">
+           <div class="content h-full w-full lg:w-4/5 bg-black border-4 flex justify-center">
                 <div class="story-content relative">
                     <img :src="currentStoryImg" class="my-3 w-[30rem] mx-auto rounded-lg h-5/6" alt="story-image">
-                    <div class="flex items-center absolute top-4 left-8 text-white">
+                    <div class="flex items-center absolute top-4 left-10 text-white">
                         <div class="flex items-center justify-center ml-10">
                             <img :src="userDetails.photo" class="h-10 w-10 rounded-full" alt="">
                             <h4 class="ml-2"> {{ currentStoryTitle }} </h4>                            
                         </div>
                     </div>
                     <div class="flex items-center mt-2">
-                        <input type="text" class="rounded-3xl py-2 px-10 bg-black border-2 border-white">
-                        <div class="smiles flex">
-                            <button class="smile rounded-full h-9 w-9 bg-white mx-1" v-for="sm in 7" :key="sm"></button>
+                        <input type="text" class="rounded-3xl md:py-2 md:px-10 px-1 w-30 ml-4 md:w-full bg-black border-2 border-white">
+                        <div class="smiles flex mr-4 ml-3">
+                            <button class="smile rounded-full h-5 w-5 md:h-9 md:w-9 bg-white md:mx-1" v-for="sm in 7" :key="sm"></button>
                         </div>
                     </div>
                 </div>
@@ -47,19 +76,19 @@ export default {
     mixins: [ UserStatus ],
     data: () => ({
         storyItems: [
-            { img: require("../../assets/images/storyes/story-1.jpg"), info: 'Hovhannes Shiraz'},
-            { img: require("../../assets/images/storyes/story-2.jpg"), info: 'Khachatur Abovian'},
-            { img: require("../../assets/images/storyes/story-3.jpg"), info: 'Missak Manouchian '},
-            { img: require("../../assets/images/storyes/story-4.jpg"), info: 'Paruyr Sevak'},
-            { img: require("../../assets/images/storyes/story-5.png"), info: 'Sayat-Nova'},
-            { img: require("../../assets/images/storyes/story-6.jpg"), info: 'Vahan Terian'},
-            { img: require("../../assets/images/storyes/story-7.png"), info: 'Yeghishe Charents'},
-            { img: require("../../assets/images/storyes/story-8.jpg"), info: 'Misaq Metsarenc'},
-            { img: require("../../assets/images/storyes/story-9.jpg"), info: 'Derenik Demirchyan'},
-            { img: require("../../assets/images/storyes/story-10.jpg"), info: 'Vahram Alazan'},
-            { img: require("../../assets/images/storyes/story-11.jpg"), info: 'Khachik Dashtenc'},
-            { img: require("../../assets/images/storyes/story-12.jpg"), info: 'Avetiq Isahakyan'},
-            { img: require("../../assets/images/storyes/story-13.png"), info: 'Aqsel Bakunts'},            
+            { id: 0, img: require("../../assets/images/storyes/story-1.jpg"), info: 'Hovhannes Shiraz'},
+            { id: 1, img: require("../../assets/images/storyes/story-2.jpg"), info: 'Khachatur Abovian'},
+            { id: 2, img: require("../../assets/images/storyes/story-3.jpg"), info: 'Missak Manouchian '},
+            { id: 3, img: require("../../assets/images/storyes/story-4.jpg"), info: 'Paruyr Sevak'},
+            { id: 4, img: require("../../assets/images/storyes/story-5.png"), info: 'Sayat-Nova'},
+            { id: 5, img: require("../../assets/images/storyes/story-6.jpg"), info: 'Vahan Terian'},
+            { id: 6, img: require("../../assets/images/storyes/story-7.png"), info: 'Yeghishe Charents'},
+            { id: 7, img: require("../../assets/images/storyes/story-8.jpg"), info: 'Misaq Metsarenc'},
+            { id: 8, img: require("../../assets/images/storyes/story-9.jpg"), info: 'Derenik Demirchyan'},
+            { id: 9, img: require("../../assets/images/storyes/story-10.jpg"), info: 'Vahram Alazan'},
+            { id: 10, img: require("../../assets/images/storyes/story-11.jpg"), info: 'Khachik Dashtenc'},
+            { id: 11, img: require("../../assets/images/storyes/story-12.jpg"), info: 'Avetiq Isahakyan'},
+            { id: 12, img: require("../../assets/images/storyes/story-13.png"), info: 'Aqsel Bakunts'},            
         ],
         currentStoryImg: '',
         currentStoryTitle: ''         
@@ -71,6 +100,14 @@ export default {
                 if(item.info === this.$route.params.id){
                     this.currentStoryImg = item.img
                     this.currentStoryTitle = item.info
+                }
+            })
+        },
+        changeStory (index) {
+            this.storyItems.map((item, ind) => {
+                if(index === ind) {
+                    this.currentStoryImg = this.storyItems[index].img
+                    this.currentStoryTitle = this.storyItems[index].info
                 }
             })
         }
@@ -88,5 +125,7 @@ beforeRouteEnter (to, from, next) {
 </script>
 
 <style>
-
+.story-items{
+    overflow: scroll;
+}
 </style>
