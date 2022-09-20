@@ -21,15 +21,19 @@
          <!-- USER DETAILS SECTION -->
 
         <div class="user-details flex justify-center">
-            <div class="lg:flex lg:justify-start grid justify-items-center text-center md:text-start md:w-8/12 w-full">
+            <div class="lg:flex lg:justify-start grid justify-items-center text-center md:text-start lg:w-6/12 md:w-8/12 w-full">
                 <img 
                     :src="userDetails.photo" 
                     class="rounded-full h-40 w-40 shadow-lg ml-5 mt-[-2.5rem] z-0"  
                     alt="user-image"
                 >
                 <div class="md:ml-10">
-                    <h1 class="font-bold text-xl md:text-4xl mt-5"> {{ userDetails.userName }} </h1>
-                    <p class="text-gray-600 font-bold">358 friends</p>
+                    <h1 class="font-bold text-xl md:text-4xl mt-5"> 
+                        {{ userDetails.userName }} 
+                    </h1>
+                    <p class="text-gray-600 font-bold">
+                        358 friends
+                    </p>
                     <div class="lg:flex lg:justify-between grid lg:w-[39rem]">
                         <div class="flex justify-center items-center">
                             <div class="friends md:block hidden" v-for="img in 8" :key="img">
