@@ -37,7 +37,7 @@
                                     />
                                 </div>
                                 <router-link to="/user/me">
-                                    <p class="text-sm font-semybold mx-3">
+                                    <p class="text-base font-bold mx-3">
                                         {{ item.title }}
                                     </p>
                                 </router-link>

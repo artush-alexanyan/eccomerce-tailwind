@@ -1,14 +1,14 @@
 <template>
-    <div class="dashboard">
+    <div class="dashboard bg-gray-50 mt-14">
     
 
         <div class="main lg:flex">
-            <div class="sidebar h-screen lg:block hidden w-full lg:w-1/3 bg-gray-200">
+            <div class="sidebar h-screen lg:block hidden w-full lg:w-1/3">
                 <div class="w-96 mt-5">
                     <div>
                         <ul>
                             <router-link class="flex justify-start items-center py-3 px-3 cursor-pointer" to="/user/me">
-                                <button class="rounded-full h-10 w-10 bg-gray-200 flex justify-center items-center">
+                                <button class="rounded-full h-10 w-10 bg-gray-100 flex justify-center items-center">
                                     <img 
                                         class="rounded-full h-10 w-10" 
                                         :src="`${isUserSigned == false ? defaultPhoto : userDetails.photo}`" 
@@ -18,7 +18,7 @@
                                 <p class="text-sm font-bold mx-3"> {{ userDetails.userName }} </p>
                             </router-link>
                             <li class="flex justify-start items-center py-3 px-3 cursor-pointer" v-for="item in sidebarItems" :key="item.info">
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
+                                <div class="rounded-full h-10 w-10 flex justify-center items-center">
                                     <img :src="item.img" alt="">
                                 </div>
                                 <p class="text-sm font-bold mx-3"> {{ item.info }} </p>
@@ -28,10 +28,10 @@
                 </div>
             </div>        
 
-            <div class="content h-screen bg-gray-200 justify-center w-full md:w-2/4">
+            <div class="content h-screen justify-center w-full md:w-2/4">
                 <FbStory />
             </div> 
-            <div class="sidebar h-screen  lg:block hidden w-full lg:w-1/3 bg-gray-200">
+            <div class="sidebar h-screen  lg:block hidden w-full lg:w-1/3">
 
             </div>                       
         </div>     
@@ -58,7 +58,7 @@ export default {
             { img: require("../assets/images/sidebar/sidebar-6.png"), info: 'Saved'},
             { img: require("../assets/images/sidebar/sidebar-7.png"), info: 'Pages'},
         ]
-    }),
+    })     
 }
 </script>
 

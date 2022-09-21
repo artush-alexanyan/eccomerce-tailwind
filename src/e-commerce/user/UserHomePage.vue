@@ -1,5 +1,5 @@
 <template>
-    <div class="user-home">
+    <div class="user-home mt-16">
 
         <!-- BACKGROUND IMAGE SECTION -->
 

@@ -1,7 +1,10 @@
 <template>
     <div class="story-view fixed top-0 w-full">
         <div class="story-view bg-white flex h-screen">
-            <div class="story-sidebar w-1/5 h-5/6 border-gray-400 border-r bg-white hidden lg:block">
+
+            <!-- SIDEBAR SECTION -->
+
+            <div class="story-sidebar w-1/5 lg:h-5/6 md:2/3 border-gray-400 border-r bg-white hidden lg:block">
                 <div class="flex justify-start items-center">
                     <router-link to="/user-dashboard">
                         <button class="rounded-full h-10 w-10 flex items-center justify-center bg-gray-400 ml-4 mt-5">
@@ -17,9 +20,11 @@
                 </div>
                 <h5 class="mt-4 ml-4 font-bold text-lg ">Your story</h5>
                 <div class="flex items-center justify-start mt-4">
-                    <button class="rounded-full h-20 w-20 flex items-center justify-center  ml-4 bg-gray-200">
-                        <font-awesome-icon icon="fa-solid fa-plus" class="text-blue-400" />
-                    </button>
+                    <router-link to="/user/me/add-story">
+                        <button class="rounded-full h-20 w-20 flex items-center justify-center  ml-4 bg-gray-200">
+                            <font-awesome-icon icon="fa-solid fa-plus" fade="true" class="text-blue-500 text-xl" />
+                        </button>                        
+                    </router-link>
                     <div class="ml-4">
                         <h6 class="font-semibold text-md">Create story</h6>
                         <p class="text-sm">Share a photo or write something</p>                        
@@ -29,12 +34,15 @@
                 <ul class="ml-4 story-items h-full mb-24">
                     <li 
                         class="flex items-center justify-start mt-4" 
-                        :class="currentItemId === index ? 'bg-gray-100 rounded-full' : ''"
+                        :class="currentItemId === index ? 'bg-gray-50 rounded-full' : ''"
                         v-for="(story, index) in storyItems" 
                         :key="story.info"
                         @click="changeStorySidebar(index)"
                     >
-                        <div class="img-wrapper border-[3px] border-blue-600 rounded-full cursor-pointer p-[0.125rem]">
+                        <div 
+                            class="img-wrapper border-[3px] rounded-full cursor-pointer p-[0.125rem]"
+                            :class="currentItemId === index? 'border-gray-300' : 'border-blue-600'"
+                        >
                             <img 
                                 :src="story.img" 
                                 class="xl:h-16 xl:w-16 md:h-10 md:w-10 rounded-full" 
@@ -43,14 +51,17 @@
                         </div>
                         <div class="ml-4">
                             <h6 class="font-semibold text-md"> {{ story.info }} </h6>
-                            <p class="text-sm text-blue-400">Share a photo or write something</p>                        
+                            <p class="text-sm text-blue-400"> {{ story.id }} hours </p>               
                         </div>                        
                     </li>
                 </ul>
             </div>
-           <div class="content h-full w-full lg:w-4/5 bg-black border-4 flex justify-center">
+
+            <!-- CONTENT SECTION -->
+
+           <div class="content h-full w-full lg:w-4/5 bg-black flex justify-center">
                 <div class="story-content relative">
-                    <img :src="currentStoryImg" class="my-3 w-[30rem] mx-auto rounded-lg h-5/6" alt="story-image">
+                    <img :src="currentStoryImg" class="my-3 w-full md:w-[30rem] mx-auto rounded-lg h-[88%]" alt="story-image">
                     <div class="flex items-center absolute top-4 left-10 text-white">
                         <div class="flex items-center justify-center ml-10">
                             <img :src="userDetails.photo" class="h-10 w-10 rounded-full" alt="">
@@ -60,10 +71,10 @@
                     <div class="absolute top-[25rem] right-0">
                         <button 
                             class="h-12 w-12 rounded-full bg-gray-100  shadow-lg" 
-                            :class="currentItemId === storyItems.length - 1 ? 'hidden' : ''" 
+                            :class="currentItemId < storyItems.length -1 ? '' : 'hidden'" 
                             @click="changeStoryNext"
                         >
-                            <font-awesome-icon icon="fa-solid fa-chevron-right" />
+                            <font-awesome-icon icon="fa-solid fa-chevron-right" fade="true" />
                         </button>
                     </div>
                     <div class="absolute top-[25rem] left-0">
@@ -72,13 +83,21 @@
                             :class="currentItemId === 0 ? 'hidden' : ''" 
                             @click="changeStoryPrevious"
                         >
-                            <font-awesome-icon icon="fa-solid fa-chevron-left" />
+                            <font-awesome-icon icon="fa-solid fa-chevron-left" fade="true" />
                         </button>
                     </div>                    
                     <div class="flex items-center mt-2">
-                        <input type="text" class="rounded-3xl md:py-2 md:px-10 px-1 w-30 ml-4 md:w-full bg-black border-2 border-white">
+                        <input 
+                            type="text" 
+                            class="rounded-3xl md:py-2 md:px-10 px-1 w-30 ml-4 md:w-full bg-black border-2 border-white"
+                        >
                         <div class="smiles flex mr-4 ml-3">
-                            <button class="smile rounded-full h-5 w-5 md:h-9 md:w-9 bg-white md:mx-1" v-for="sm in 7" :key="sm"></button>
+                            <button 
+                                class="smile rounded-full h-5 w-5 md:h-9 md:w-9 bg-white md:mx-1" 
+                                v-for="sm in 7" 
+                                :key="sm"
+                            >
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -147,7 +166,15 @@ export default {
                 this.currentStoryImg = this.storyItems[this.currentItemId].img
                 this.currentStoryTitle = this.storyItems[this.currentItemId].info                
             }
-        }        
+        },
+        closeStoriesByEscKey () {
+           document.addEventListener("keydown", (event) => {
+                if(event.code === 'Escape') {
+                    console.log("Event: ", event)
+                    this.$router.push({ name: 'DashBoard' })
+                }
+            })
+        } 
     },
 beforeRouteEnter (to, from, next) { 
   next(vm => { 
@@ -157,6 +184,20 @@ beforeRouteEnter (to, from, next) {
     // re-populate search results
     vm.getStoryItem();
   }) 
+},
+mounted () {
+    this.closeStoriesByEscKey()
+    document.addEventListener("keydown", (event) => {
+        if(event.code === 'ArrowRight') {
+            this.changeStoryNext ()
+        }
+    }),
+    document.addEventListener("keydown", (event) => {
+        if(event.code === 'ArrowLeft') {
+            console.log("Arrowright ", event)
+            this.changeStoryPrevious ()
+        }
+    })        
 } 
 }
 </script>

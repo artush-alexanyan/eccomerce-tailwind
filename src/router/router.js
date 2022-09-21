@@ -36,6 +36,11 @@ const router = new VueRouter({
             name: 'StoryView',
             component: () => import('../e-commerce/content/StoryView.vue') ,
 
+        },
+        {
+            path: '/user/me/add-story',
+            name: 'UserAddStory',
+            component: () => import('../e-commerce/user/UserAddStory.vue')
         }
     ]
 })

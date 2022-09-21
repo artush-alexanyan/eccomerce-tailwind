@@ -1,9 +1,9 @@
 <template>
     <div class="mt-10 bg-white w-full rounded-lg shadow-lg py-2">
-        <ul class="flex justify-between items-center border-b">
+        <ul class="flex justify-between items-center">
             <li 
                 class="nav-item md:mx-4 cursor-pointer" 
-                :class="currentTab === index ? 'border-b-2 border-b-blue-700': ''"
+                :class="currentTab === index ? 'border-b-2 border-b-blue-600': ''"
                 @click="changeStoryTab(index)"
                 v-for="(action, index) in userActions" :key="index"
             >

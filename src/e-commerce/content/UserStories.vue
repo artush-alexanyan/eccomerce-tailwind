@@ -4,7 +4,7 @@
         <div class="flex md:justify-between items-center my-4">
             <button 
                 type="button" 
-                class="rounded-full md:h-10 md:w-10 bg-gray-200 border flex justify-center items-center ml-2 md:ml-5" 
+                class="rounded-full md:h-10 md:w-10 bg-gray-100 flex justify-center items-center ml-2 md:ml-5" 
                 :class="page === 0 ? 'hidden' : ''"
                 @click="previoustStory"
             >
@@ -26,7 +26,7 @@
             </div>
             <button 
                 type="button" 
-                class="rounded-full md:h-10 md:w-10 h-7 w-7 bg-gray-200 border flex justify-center items-center mr-2 md:mr-5" 
+                class="rounded-full md:h-10 md:w-10 h-7 w-7 bg-gray-100 flex justify-center items-center mr-2 md:mr-5" 
                 :class="nextPageIconHide ? 'hidden' : ''"
                 @click="nextStory"
             >
@@ -44,7 +44,7 @@ export default {
     data: () => ({
         currentTab: 0,
         page: 0,
-        pageCount: 4,
+        pageCount: 5,
         storyItems: [
             { img: require("../../assets/images/storyes/story-1.jpg"), info: 'Hovhannes Shiraz'},
             { img: require("../../assets/images/storyes/story-2.jpg"), info: 'Khachatur Abovian'},
@@ -80,7 +80,21 @@ export default {
         nextPageIconHide () {
             return this.storyItems.length - this.page === this.storyItems.length % this.pageCount
         },
-    }
+    },
+    mounted () {
+        this.closeStoriesByEscKey()
+        document.addEventListener("keydown", (event) => {
+            if(event.code === 'ArrowRight') {
+                this.changeStoryNext ()
+            }
+        }),
+        document.addEventListener("keydown", (event) => {
+            if(event.code === 'ArrowLeft') {
+                console.log("Arrowright ", event)
+                this.changeStoryPrevious ()
+            }
+        })        
+    }   
 }
 </script>
 

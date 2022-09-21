@@ -1,5 +1,5 @@
 <template>
-    <div class="app-navbar">
+    <div class="app-navbar fixed top-0 w-full">
 
         <!-- AUTHENTICATED USER NAVBAR WITH LOGIN/REGISTRATION PAGES -->
 
@@ -55,7 +55,11 @@
                         alt="facebook-icon"
                     >
                 </router-link>
-                <input type="text" placeholder="Search Facebook" class="w-60 rounded-full bg-gray-100 py-2.5 ml-2 serch-input lg:block hidden">
+                <input 
+                    type="text" 
+                    placeholder="Search Facebook" 
+                    class="search -60 rounded-full bg-gray-50 py-2.5 ml-2 serch-input lg:block hidden"
+                >
             </div>            
             <div class="flex">
                 <div class="md:mx-7 mx-3">
@@ -76,7 +80,7 @@
             </div>
             <div class="flex">
                 <div class="relative mx-2" >
-                <button class="rounded-full border-2 h-10 w-10 bg-gray-200 lg:block hidden">
+                <button class="rounded-full h-11 w-11 justify-center items-center  bg-gray-100 lg:flex hidden">
                     <font-awesome-icon icon="fa-solid fa-bars" />
                 </button>
                     <div class="absolute right-0 w-96 mt-5 hidden">
@@ -122,7 +126,7 @@
                     </div>
                 </div> 
                 <div class="relative mx-2" >
-                <button class="rounded-full border-2 h-10 w-10 bg-gray-200 lg:block hidden">
+                <button class="rounded-full h-11 w-11 justify-center items-center bg-gray-100 lg:flex hidden">
                     <font-awesome-icon icon="fa-solid fa-message" />
                 </button>
                     <div class="absolute right-0 w-96 mt-5 hidden">
@@ -168,7 +172,7 @@
                     </div>
                 </div>              
                 <div class="relative mx-2" >
-                <button class="rounded-full border-2 h-10 w-10 bg-gray-200 lg:block hidden">
+                <button class="rounded-full h-11 w-11 justify-center items-center flex bg-gray-100 lg:block hidden">
                     <font-awesome-icon icon="fa-solid fa-bell" />
                 </button>
                     <div class="absolute right-0 w-96 mt-5 hidden">
@@ -233,5 +237,7 @@ export default {
 </script>
 
 <style>
-
+.search::placeholder{
+    padding-left: 10px;
+}
 </style>
