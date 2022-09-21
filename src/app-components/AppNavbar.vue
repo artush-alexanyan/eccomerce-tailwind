@@ -4,7 +4,7 @@
         <!-- AUTHENTICATED USER NAVBAR WITH LOGIN/REGISTRATION PAGES -->
 
         <div 
-            class="flex justify-between items-center border-b fixed top-0 w-full shadow-xl py-2" 
+            class="flex justify-between items-center border-b border-b-gray-100 fixed top-0 w-full shadow-xl py-2" 
             v-show="isUserSigned == false"
         >
             <div class="flex jutify-between items-center ml-10 w-50">
@@ -21,7 +21,7 @@
         
                 <button 
                     type="button"
-                    class="text-gray-500 bg-gray-100 hidden md:block rounded-full ml-4 px-4 py-2"
+                    class="text-gray-500 bg-gray-0 hidden md:block rounded-full ml-4 px-4 py-2"
                 > 
                 No user signed in
                 </button>           
@@ -31,7 +31,7 @@
                 v-if="isUserSigned == false"
             >
                 <button 
-                    class="px-5 rounded-full border-0 text-white bg-blue-500  py-2.5 font-bold text-md mx-3"
+                    class="px-5 rounded-full border-0 text-white bg-blue-600  py-2.5 font-bold text-md mx-3"
                 >
                     <router-link to="/">Login</router-link>
                 </button>

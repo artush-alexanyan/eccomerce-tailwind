@@ -45,10 +45,12 @@
                             </div>
                         </div>
                         <div class="flex justify-center mt-3 items-center">
-                            <button class="rounded bg-blue-500 text-white py-[0.25rem] px-2 flex items-center jutify-between shadow-lg">
-                                <font-awesome-icon icon="fa-solid fa-plus" />
-                                <p class="font-bold text-base ml-1">Add to story</p>
-                            </button>  
+                            <router-link to="/user/me/add-story">
+                                <button class="rounded bg-blue-600 text-white py-[0.25rem] px-2 flex items-center jutify-between shadow-lg">
+                                    <font-awesome-icon icon="fa-solid fa-plus" />
+                                    <p class="font-bold text-base ml-1">Add to story</p>
+                                </button>  
+                            </router-link>
                             <button class="rounded ml-3 bg-gray-200 py-[0.25rem] px-2 flex items-center jutify-between shadow-lg">
                                 <font-awesome-icon icon="fa-solid fa-pencil" />
                                 <p class="font-bold text-base ml-1">Edit profile</p>

@@ -13,7 +13,7 @@
                     <div v-if="showUserInfo" class="bg-white md:w-96 w-72 mt-5 shadow-xl rounded-lg py-2 border border-gray-200">
                         <router-link to="/user/me">
                             <div 
-                                class="card rounded-lg border mx-3 p-2 flex items-center" 
+                                class="card rounded-lg border border-gray-200 mx-3 p-2 flex items-center" 
                                 @click="showUserInfo = false"
                             >
                                 <img 
@@ -30,7 +30,7 @@
                                 :key="item.title"
                                 @click="showUserInfo = flase"
                             >
-                                <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
+                                <div class="rounded-full bg-gray-50 h-10 w-10 flex justify-center items-center">
                                     <font-awesome-icon 
                                         :icon="item.icon" 
                                         class="font-semibold text-xl"

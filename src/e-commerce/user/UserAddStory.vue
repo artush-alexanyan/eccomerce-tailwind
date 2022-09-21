@@ -3,6 +3,13 @@
         <div class="flex justify-center">
             <div class="sidebar w-1/5 h-full bg-white hidden lg:block">
                 <div class="sidebar-content-wrapper border-b pb-5">
+                    <div class="flex justify-start items-center py-3 mr-3">
+                        <router-link to="/user-dashboard">
+                            <button class="rounded-full h-10 w-10 flex items-center justify-center bg-gray-300 ml-4">
+                                <font-awesome-icon icon="fa-solid fa-xmark" class="text-2xl text-white" />
+                            </button>                        
+                        </router-link>
+                    </div>                         
                     <div class="flex justify-between items-center mx-4 mt-4">
                         <h5 class="font-extrabold text-xl ">Your story</h5>
                         <button class="rounded-full flex items-center justify-center bg-gray-100 p-2">
@@ -78,15 +85,15 @@
                         </div>
 
 
-                        <div class="buttons fixed bottom-0 left-0">
+                        <div class="button fixed bottom-0 flex justify-start my-5 items-center">
                             <button 
-                                class="px-3 py-2 m-10 text-white rounded-lg bg-green" 
+                                class="px-3 py-2 text-white rounded-lg bg-green" 
                                 @click="createTextStory = false"
                             >
                                 Discard
                             </button>   
                             <button 
-                                class="px-3 py-2 m-10 text-white rounded-lg bg-blue-500" 
+                                class="px-3 py-2 ml-10 text-white rounded-lg bg-blue-500" 
                                 @click="createTextStory = false"
                             >
                                 Share to story
@@ -96,14 +103,7 @@
                 </div>
             </div>
             <div class="content lg:w-4/5 w-full h-full bg-gray-50">
-                <div class="content-wrapper">
-                    <div class="flex justify-end items-center py-3 mr-3">
-                        <router-link to="/user-dashboard">
-                            <button class="rounded-full h-10 w-10 flex items-center justify-center bg-gray-300 ml-4">
-                                <font-awesome-icon icon="fa-solid fa-xmark" class="text-2xl text-white" />
-                            </button>                        
-                        </router-link>
-                    </div>                        
+                <div class="content-wrapper">                   
                     <div class="flex items-center justify-center w-full h-screen">                         
                         <div class="flex" v-if="!createTextStory">
                             <div class="photo-history h-[22rem] w-56 cursor-pointer rounded-xl 

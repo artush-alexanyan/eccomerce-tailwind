@@ -4,13 +4,13 @@
             class="flex justify-start items-center md:py-3 px-3 cursor-pointer" 
             @click="UserSignOut"
         >
-            <div class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center">
+            <div class="rounded-full bg-gray-50 h-10 w-10 flex justify-center items-center">
                 <font-awesome-icon 
                     icon="fa-solid fa-right-from-bracket" 
                     class="font-semibold text-xl"
                 />
             </div>
-            <p class="text-sm font-semybold mx-3">
+            <p class="text-base font-bold mx-3">
                 Log out
             </p>
         </li>
