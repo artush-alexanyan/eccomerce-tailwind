@@ -88,7 +88,7 @@
                         <div class="button fixed bottom-0 flex justify-start my-5 items-center">
                             <button 
                                 class="px-3 py-2 text-white rounded-lg bg-green" 
-                                @click="discardTextStory"
+                                @click="showDiscardModal"
                             >
                                 Discard
                             </button>   
@@ -147,27 +147,56 @@
                                         :class="defaultTextStyle"
                                     >
                                         {{ text }}
-                                    </p>
+                                    </p>                                  
                                 </div>
+
+
+                                    <Transition name="bounce">
+                                        <div 
+                                            class="transition fixed rounded-2xl shadow-2xl z-0 py-5 bg-white h-32 border border-gray-300 w-96 flex items-center justify-center" v-show="showModal"  
+                                        >
+                                            <div class="modal-content">
+                                                <h4 class="title font-semibold text-base">Are you sure you want to discard changes?</h4>
+                                                <div class="flex justify-between items-center mt-3">
+                                                    <button 
+                                                        class="rounded-lg  border-gray-100 bg-purple text-white px-3 py-2"
+                                                        @click="discardTextStory"
+                                                    >
+                                                        Discard
+                                                    </button>
+                                                    <button 
+                                                        class="rounded-lg  border-gray-100 bg-blue-600 text-white px-3 py-2" 
+                                                        @click="showModal = false"
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </Transition>                                    
+                   
+  
+
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>            
+                </div>               
+            </div>           
         </div>
     </div>
 </template>
 
 <script>
 import UserStatus from '../../components/auth/mixins/authStatusCheck'
-// import NavAvatarBtn from '../../app-components/NavAvatarBtn.vue'
 
 export default {
     name: 'UserAddStory',
     mixins: [ UserStatus ],
     components: {  },
     data: () => ({
+        show: true,
         createTextStory: false,
+        showModal: false,
         text: 'Start typing',
         showOptions: false,
         textStyle: [ 
@@ -214,12 +243,14 @@ export default {
             })
         },
         discardTextStory () {
-            if(confirm("Are you sure you want to discard changes?") === true){
                 this.defaultTextStyle = ''
                 this.defaultBgColor = 'blue-500'
                 this.text = "Start typing"
-                this.createTextStory = false
-            }
+                setTimeout(() => { this.showModal = false }, 500)
+                setTimeout(() => { this.createTextStory = false }, 1000)
+        },
+        showDiscardModal () {
+            this.showModal = true
         }
     },
     computed: {
@@ -230,8 +261,25 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 textarea::placeholder{
     padding: 10px 15px;
+}
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>
