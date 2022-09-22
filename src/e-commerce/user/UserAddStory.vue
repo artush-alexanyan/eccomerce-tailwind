@@ -88,7 +88,7 @@
                         <div class="button fixed bottom-0 flex justify-start my-5 items-center">
                             <button 
                                 class="px-3 py-2 text-white rounded-lg bg-green" 
-                                @click="createTextStory = false"
+                                @click="discardTextStory"
                             >
                                 Discard
                             </button>   
@@ -146,7 +146,7 @@
                                         class="text-white text-2xl text-center w-fit"
                                         :class="defaultTextStyle"
                                     >
-                                        {{ text === '' ? 'Start Typing' : text }}
+                                        {{ text }}
                                     </p>
                                 </div>
                             </div>
@@ -168,7 +168,7 @@ export default {
     components: {  },
     data: () => ({
         createTextStory: false,
-        text: '',
+        text: 'Start typing',
         showOptions: false,
         textStyle: [ 
             { id: 0, style: 'font-bold'}, 
@@ -204,18 +204,22 @@ export default {
         },
         selectTextStyle (index) {
             this.textStyle.map((item, ind) => {
-                if(index === ind) {
-                    this.defaultTextStyle = item.style
-                    this.showOptions = false
-                }
+                index === ind ? this.defaultTextStyle = item.style : this.defaultTextStyle
+                this.showOptions = false
             })
         },
         selectBgColor (index) {
             this.colors.map((item, ind) => {
-                if(index === ind) {
-                    this.defaultBgColor = item.colorClass
-                }
+                index === ind ? this.defaultBgColor = item.colorClass : this.defaultBgColor 
             })
+        },
+        discardTextStory () {
+            if(confirm("Are you sure you want to discard changes?") === true){
+                this.defaultTextStyle = ''
+                this.defaultBgColor = 'blue-500'
+                this.text = "Start typing"
+                this.createTextStory = false
+            }
         }
     },
     computed: {
