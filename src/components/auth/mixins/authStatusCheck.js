@@ -3,6 +3,7 @@ import firebase from "../../../firebase/firebase"
 const authStatus = {
     data: () => ({
         userDetails: {
+            id: '',
             userName: '',
             email: '',
             photo: '',
@@ -17,6 +18,7 @@ const authStatus = {
                 if (user) {
                   // User is signed in.
                   console.log("User  ",user)
+                  this.userDetails.id = user.uid
                   this.isUserSigned = true
                   this.userDetails.userName = user.displayName
                   this.userDetails.email = user.email

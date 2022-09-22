@@ -9,7 +9,21 @@
                 @click="previoustStory"
             >
                 <font-awesome-icon icon="fa-solid fa-chevron-left" class="text-gray-400" />
-            </button>                    
+            </button>  
+            <div 
+                class="card mx-2 relative" 
+                v-for="userSt in userStories" 
+                :key="userSt.createdBy"
+            >
+                <router-link :to="'/user-stories/' + userSt.createdBy">
+                    <div class="card-image cursor-pointer">
+                        <img :src="userSt.imgUrl" class="md:h-48 md:w-28 h-32 w-24 rounded-lg border border-gray-200" alt="">
+                    </div>                    
+                </router-link>
+                <div class="absolute text-xs bottom-2 left-1">
+                    <h6 class="font-extrabold text-white z-0">Norayr Tamazyan</h6>
+                </div>
+            </div>                              
             <div 
                 class="card mx-2 relative" 
                 v-for="story in storyIt" 
@@ -38,13 +52,16 @@
 </template>
 
 <script>
+import firebase from '../../firebase/firebase'
+import UserStatus from '../../components/auth/mixins/authStatusCheck'
 
 export default {
     name: 'UserStories',
+    mixins: [ UserStatus ],
     data: () => ({
         currentTab: 0,
         page: 0,
-        pageCount: 5,
+        pageCount: 4,
         storyItems: [
             { img: require("../../assets/images/storyes/story-1.jpg"), info: 'Hovhannes Shiraz'},
             { img: require("../../assets/images/storyes/story-2.jpg"), info: 'Khachatur Abovian'},
@@ -59,7 +76,8 @@ export default {
             { img: require("../../assets/images/storyes/story-11.jpg"), info: 'Khachik Dashtenc'},
             { img: require("../../assets/images/storyes/story-12.jpg"), info: 'Avetiq Isahakyan'},
             { img: require("../../assets/images/storyes/story-13.png"), info: 'Aqsel Bakunts'},            
-        ]     
+        ],
+        userStories: []     
     }),
     methods: {
         changeStoryTab (index) {
@@ -71,7 +89,16 @@ export default {
         },
         previoustStory () {
             this.page >= this.pageCount ? this.page-=this.pageCount : this.page
-        }        
+        },
+        async getUserStoryes () {
+            // let docId = toString(this.userDetails.id)
+          await firebase.firestore().collection('Users').doc(this.userDetails.id).collection('UserStories').doc(this.userDetails.id)
+            .get().then(snapshot =>{
+                    const document = snapshot.data()
+                    console.log("Documents: ", document)
+                    this.userStories.push = document
+            })
+        }                
     },
     computed: {
         storyIt () {
@@ -79,10 +106,10 @@ export default {
         },
         nextPageIconHide () {
             return this.storyItems.length - this.page === this.storyItems.length % this.pageCount
-        },
+        }
     },
     mounted () {
-        this.closeStoriesByEscKey()
+        this.getUserStoryes()
         document.addEventListener("keydown", (event) => {
             if(event.code === 'ArrowRight') {
                 this.changeStoryNext ()

@@ -25,6 +25,7 @@
                         <h2 class="ml-4 text-lg font-base"> {{ userDetails.userName }} </h2>
                     </div>                    
                 </div>
+                <Transition name="bounce">
                 <div class="edit-text h-screen" v-show="createTextStory"  >
                     <div class="grid justify-items-center mx-5 mt-3">
 
@@ -94,12 +95,14 @@
                             </button>   
                             <button 
                                 class="px-3 py-2 ml-10 text-white rounded-lg bg-blue-500" 
+                                @click="createStory"
                             >
                                 Share to story
-                            </button>                                                          
+                            </button>                                                 
                         </div>
                     </div>
                 </div>
+                </Transition>
             </div>
             <div class="content lg:w-4/5 w-full h-full bg-gray-50">
                 <div class="content-wrapper">                   
@@ -139,20 +142,25 @@
                         </div>
                         <div class="flex justify-center items-center h-[75%] w-2/4 border-gray-300 rounded-2xl bg-white relative" v-else>
                             <h6 class="font-semibold text-sm absolute top-2 left-8">Preview</h6>
-                            <div class="rounded-2xl bg-black h-[90%] w-[80%] flex items-center justify-center">
-                                <div class="rounded-lg flex items-center justify-center h-[98%] w-[60%]" :class="'bg-' + defaultBgColor">
+                            <div class="rounded-2xl bg-black h-[90%] w-[80%] flex items-center justify-center" >
+                                <div 
+                                    class="rounded-lg flex items-center justify-center h-[98%] w-[60%]" 
+                                    :class="'bg-' + defaultBgColor"
+                                    ref="printMe"
+                                >
                                     <p 
                                         class="text-white text-2xl text-center w-fit"
                                         :class="defaultTextStyle"
                                     >
                                         {{ text }}
-                                    </p>                                  
+                                    </p>     
                                 </div>
 
+                                <!------- BOUNCE MODAL ------->
 
                                     <Transition name="bounce">
                                         <div 
-                                            class="modal fixed rounded-2xl shadow-2xl z-0 py-5 bg-white h-32 border border-gray-300 w-96 flex items-center justify-center" 
+                                            class="modal fixed rounded shadow-2xl z-0 py-5 bg-white h-32  w-96 flex items-center justify-center" 
                                             v-show="showModal"  
                                         >
                                             <div class="modal-content">
@@ -173,9 +181,48 @@
                                                 </div>
                                             </div>
                                         </div> 
-                                    </Transition>                                    
-                   
-  
+                                    </Transition> 
+
+                                    <Transition name="bounce">
+                                        <div 
+                                            class="modal fixed rounded shadow-2xl z-0 py-2 bg-white h-24  w-96 flex items-center justify-center" 
+                                            v-show="creatingStory"  
+                                        >
+                                            <div class="modal-content">
+                                                <h4 class="title font-semibold text-base">Please wait, Creating your story...</h4>
+                                                <div class="flex justify-between items-center mt-3">
+                                                    <!-- <button 
+                                                        class="rounded-lg  border-gray-100 font-semibold mt-2 bg-blue-600 text-white px-3 py-2" 
+                                                        @click="showModal = false"
+                                                    >
+                                                        Cancel
+                                                    </button> -->
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </Transition>                                                                        
+<!--                    
+                                    <div class="bg-red"></div>
+                                    <div class="bg-orange"></div>
+                                    <div class="bg-tomato"></div>
+                                    <div class="bg-yellow"></div>
+                                    <div class="bg-purple"></div>
+                                    <div class="bg-green"></div>
+                                    <div class="bg-yellow"></div>
+                                    <div class="bg-yellow-green"></div>
+                                    <div class="bg-purple"></div>
+                                    <div class="bg-light-purple"></div>
+                                    <div class="bg-dark-red"></div>
+                                    <div class="bg-blue-600"></div>
+                                    <div class="bg-blue-500"></div>
+                                    <div class="bg-light-cyan"></div>
+                                    <div class="bg-light-pink"></div>
+                                    <div class="bg-light-pink"></div>
+                                    <div class="bg-dark-purple"></div>
+                                    <div class="bg-dark-gray"></div>
+                                    <div class="bg-light-blue"></div>
+                                    <div class="bg-blue-200"></div>
+                                    <div class="bg-light-green"></div> -->
 
                             </div>
                         </div>
@@ -188,6 +235,8 @@
 
 <script>
 import UserStatus from '../../components/auth/mixins/authStatusCheck'
+import firebase from '../../firebase/firebase'
+// import html2canvas from 'vue-html2canvas'
 
 export default {
     name: 'UserAddStory',
@@ -197,6 +246,7 @@ export default {
         show: true,
         createTextStory: false,
         showModal: false,
+        creatingStory: false,
         text: 'Start typing',
         showOptions: false,
         textStyle: [ 
@@ -224,7 +274,8 @@ export default {
             { id: 16, colorClass: 'tomato' },
         ],
         defaultTextStyle: '',
-        defaultBgColor: 'blue-500'
+        defaultBgColor: 'blue-500',
+        output: null
     }),
     methods: {
         selectStoryImage () {
@@ -251,7 +302,29 @@ export default {
         },
         showDiscardModal () {
             this.showModal = true
-        }
+        },
+       async createStory() {
+            this.creatingStory = true
+            const el = this.$refs.printMe
+            // add option type to get the image version
+            // if not provided the promise will return 
+            // the canvas.
+            const options = {
+                type: 'dataURL'
+            }
+            this.output = await this.$html2canvas(el, options)
+            console.log("Output: ", this.output)            
+            setTimeout(() => {
+                firebase.firestore().collection('Users').doc(this.userDetails.id).collection("UserStories").doc(this.userDetails.id).set({
+                    createdBy: this.userDetails.userName,
+                    id: this.userDetails.id,
+                    imgUrl: this.output
+                })     
+                this.creatingStory = false
+                this.$router.push({ name: 'DashBoard' })
+                console.log("Story successfuly created!")                           
+            }, 2000)
+        }               
     },
     computed: {
         defoultTextToUpper () {
@@ -263,23 +336,23 @@ export default {
 
 <style scoped>
 textarea::placeholder{
-    padding: 10px 15px;
+    padding: 10px 15px
 }
 .bounce-enter-active {
-  animation: bounce-in 0.5s;
+  animation: bounce-in 0.25s
 }
 .bounce-leave-active {
-  animation: bounce-in 0.5s reverse;
+  animation: bounce-in 0.25s reverse
 }
 @keyframes bounce-in {
   0% {
-    transform: scale(0);
+    transform: scale(0)
   }
   50% {
-    transform: scale(1.25);
+    transform: scale(1.25)
   }
   100% {
-    transform: scale(1);
+    transform: scale(1)
   }
 }
 </style>

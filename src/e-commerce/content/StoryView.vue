@@ -22,7 +22,7 @@
                 <div class="flex items-center justify-start mt-4">
                     <router-link to="/user/me/add-story">
                         <button class="rounded-full h-20 w-20 flex items-center justify-center  ml-4 bg-gray-200">
-                            <font-awesome-icon icon="fa-solid fa-plus" fade="true" class="text-blue-500 text-xl" />
+                            <font-awesome-icon icon="fa-solid fa-plus" :fade="fade" class="text-blue-500 text-xl" />
                         </button>                        
                     </router-link>
                     <div class="ml-4">
@@ -74,7 +74,7 @@
                             :class="currentItemId < storyItems.length -1 ? '' : 'hidden'" 
                             @click="changeStoryNext"
                         >
-                            <font-awesome-icon icon="fa-solid fa-chevron-right" fade="true" />
+                            <font-awesome-icon icon="fa-solid fa-chevron-right" />
                         </button>
                     </div>
                     <div class="absolute top-[25rem] left-0">
@@ -83,7 +83,7 @@
                             :class="currentItemId === 0 ? 'hidden' : ''" 
                             @click="changeStoryPrevious"
                         >
-                            <font-awesome-icon icon="fa-solid fa-chevron-left" fade="true" />
+                            <font-awesome-icon icon="fa-solid fa-chevron-left" :fade="fade" />
                         </button>
                     </div>                    
                     <div class="flex items-center mt-2">
@@ -111,6 +111,12 @@ import UserStatus from '../../components/auth/mixins/authStatusCheck'
 
 export default {
     name: 'StoryView',
+    props: {
+        fade: {
+            type: Boolean,
+            default: true
+        }
+    },
     mixins: [ UserStatus ],
     page: 0,
     data: () => ({
@@ -167,14 +173,6 @@ export default {
                 this.currentStoryTitle = this.storyItems[this.currentItemId].info                
             }
         },
-        closeStoriesByEscKey () {
-           document.addEventListener("keydown", (event) => {
-                if(event.code === 'Escape') {
-                    console.log("Event: ", event)
-                    this.$router.push({ name: 'DashBoard' })
-                }
-            })
-        } 
     },
 beforeRouteEnter (to, from, next) { 
   next(vm => { 
@@ -186,7 +184,6 @@ beforeRouteEnter (to, from, next) {
   }) 
 },
 mounted () {
-    this.closeStoriesByEscKey()
     document.addEventListener("keydown", (event) => {
         if(event.code === 'ArrowRight') {
             this.changeStoryNext ()
@@ -197,7 +194,12 @@ mounted () {
             console.log("Arrowright ", event)
             this.changeStoryPrevious ()
         }
-    })        
+    })
+    document.addEventListener("keydown", (event) => {
+        if(event.code === 'Escape') {
+            this.$router.push({ name: 'DashBoard' })
+        }
+    })            
 } 
 }
 </script>

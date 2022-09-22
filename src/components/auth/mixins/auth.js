@@ -10,13 +10,26 @@ const auth = {
     }),
     methods: {
         continueWithGmail (){
-            let provider = new firebase.auth.GoogleAuthProvider();
+            let provider = new firebase.auth.GoogleAuthProvider()
             firebase
             .auth()
             .signInWithPopup(provider)
             .then((result) => {
-                let user = result.user;
-                console.log("Successfuly signed in! ",user) // User that was authenticated
+                const user = result.user
+                console.log('User ', user)
+                const {additionalUserInfo: {isNewUser}} = result
+
+                console.log(isNewUser ? "This user just registered" : "Existing User")
+                if(isNewUser) {
+                    firebase.firestore().collection('Users').doc(user.uid).set({
+                        id: user.uid,
+                        userName: user.displayName,
+                        userEmail: user.email,
+                        userEmailVerified: user.emailVerified,
+                        created_at: user.metadata.creationTime,
+                        lastLogin: user.metadata.lastSignInTime
+                    })                          
+                }
                 this.loading = true
                 setTimeout(() => {
                     this.loading = false
