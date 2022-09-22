@@ -31,7 +31,7 @@
                         <!-- ----------- TEXTAREA -------------- -->
 
                         <textarea 
-                            class="border border-gray-200 rounded-lg w-full h-40"
+                            class="border border-gray-200 rounded-lg w-full h-40 p-4 text-xl italic"
                             v-model="text"
                             placeholder="Start typing"
                         ></textarea>
@@ -94,7 +94,6 @@
                             </button>   
                             <button 
                                 class="px-3 py-2 ml-10 text-white rounded-lg bg-blue-500" 
-                                @click="createTextStory = false"
                             >
                                 Share to story
                             </button>                                                          
@@ -153,19 +152,20 @@
 
                                     <Transition name="bounce">
                                         <div 
-                                            class="transition fixed rounded-2xl shadow-2xl z-0 py-5 bg-white h-32 border border-gray-300 w-96 flex items-center justify-center" v-show="showModal"  
+                                            class="modal fixed rounded-2xl shadow-2xl z-0 py-5 bg-white h-32 border border-gray-300 w-96 flex items-center justify-center" 
+                                            v-show="showModal"  
                                         >
                                             <div class="modal-content">
                                                 <h4 class="title font-semibold text-base">Are you sure you want to discard changes?</h4>
                                                 <div class="flex justify-between items-center mt-3">
                                                     <button 
-                                                        class="rounded-lg  border-gray-100 bg-purple text-white px-3 py-2"
+                                                        class="rounded-lg  border-gray-100 font-semibold mt-2 bg-red text-white px-3 py-2"
                                                         @click="discardTextStory"
                                                     >
                                                         Discard
                                                     </button>
                                                     <button 
-                                                        class="rounded-lg  border-gray-100 bg-blue-600 text-white px-3 py-2" 
+                                                        class="rounded-lg  border-gray-100 font-semibold mt-2 bg-blue-600 text-white px-3 py-2" 
                                                         @click="showModal = false"
                                                     >
                                                         Cancel
@@ -246,7 +246,7 @@ export default {
                 this.defaultTextStyle = ''
                 this.defaultBgColor = 'blue-500'
                 this.text = "Start typing"
-                setTimeout(() => { this.showModal = false }, 500)
+                setTimeout(() => { this.showModal = false }, 300)
                 setTimeout(() => { this.createTextStory = false }, 1000)
         },
         showDiscardModal () {
