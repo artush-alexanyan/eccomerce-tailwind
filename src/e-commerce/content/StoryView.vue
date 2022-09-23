@@ -35,8 +35,8 @@
                     <li 
                         class="flex items-center justify-start mt-4" 
                         :class="currentItemId === index ? 'bg-gray-50 rounded-full' : ''"
-                        v-for="(story, index) in storyItems" 
-                        :key="story.info"
+                        v-for="(story, index) in allUserStories" 
+                        :key="story.id"
                         @click="changeStorySidebar(index)"
                     >
                         <div 
@@ -44,14 +44,14 @@
                             :class="currentItemId === index? 'border-gray-300' : 'border-blue-600'"
                         >
                             <img 
-                                :src="story.img" 
+                                :src="story.userPhoto" 
                                 class="xl:h-16 xl:w-16 md:h-10 md:w-10 rounded-full" 
-                                :alt="'Story item' + story.info"
+                                :alt="'Story item' + story.createdBy"
                             >
                         </div>
                         <div class="ml-4">
-                            <h6 class="font-semibold text-md"> {{ story.info }} </h6>
-                            <p class="text-sm text-blue-400"> {{ story.id }} hours </p>               
+                            <h6 class="font-semibold text-md"> {{ story.createdBy }} </h6>
+                            <p class="text-sm text-blue-400"> {{ story.id.length }} hours </p>               
                         </div>                        
                     </li>
                 </ul>
@@ -71,7 +71,7 @@
                     <div class="absolute top-[25rem] right-0">
                         <button 
                             class="h-12 w-12 rounded-full bg-gray-100  shadow-lg" 
-                            :class="currentItemId < storyItems.length -1 ? '' : 'hidden'" 
+                            :class="currentItemId < allUserStories.length -1 ? '' : 'hidden'" 
                             @click="changeStoryNext"
                         >
                             <font-awesome-icon icon="fa-solid fa-chevron-right" />
@@ -108,6 +108,7 @@
 
 <script>
 import UserStatus from '../../components/auth/mixins/authStatusCheck'
+import allStory from '../../mixins/getStoryItems'
 
 export default {
     name: 'StoryView',
@@ -117,72 +118,38 @@ export default {
             default: true
         }
     },
-    mixins: [ UserStatus ],
+    mixins: [ UserStatus, allStory ],
     page: 0,
     data: () => ({
-        storyItems: [
-            { id: 0, img: require("../../assets/images/storyes/story-1.jpg"), info: 'Hovhannes Shiraz'},
-            { id: 1, img: require("../../assets/images/storyes/story-2.jpg"), info: 'Khachatur Abovian'},
-            { id: 2, img: require("../../assets/images/storyes/story-3.jpg"), info: 'Missak Manouchian '},
-            { id: 3, img: require("../../assets/images/storyes/story-4.jpg"), info: 'Paruyr Sevak'},
-            { id: 4, img: require("../../assets/images/storyes/story-5.png"), info: 'Sayat-Nova'},
-            { id: 5, img: require("../../assets/images/storyes/story-6.jpg"), info: 'Vahan Terian'},
-            { id: 6, img: require("../../assets/images/storyes/story-7.png"), info: 'Yeghishe Charents'},
-            { id: 7, img: require("../../assets/images/storyes/story-8.jpg"), info: 'Misaq Metsarenc'},
-            { id: 8, img: require("../../assets/images/storyes/story-9.jpg"), info: 'Derenik Demirchyan'},
-            { id: 9, img: require("../../assets/images/storyes/story-10.jpg"), info: 'Vahram Alazan'},
-            { id: 10, img: require("../../assets/images/storyes/story-11.jpg"), info: 'Khachik Dashtenc'},
-            { id: 11, img: require("../../assets/images/storyes/story-12.jpg"), info: 'Avetiq Isahakyan'},
-            { id: 12, img: require("../../assets/images/storyes/story-13.png"), info: 'Aqsel Bakunts'},            
-        ],
         currentStoryImg: '',
         currentStoryTitle: '',         
-        currentItemId: null,
+        currentItemId: 0,
     }),
-    methods: {
-        getStoryItem () {
-            console.log(this.$route.params.id)
-            this.storyItems.map(item => {
-                if(item.info === this.$route.params.id){
-                    this.currentStoryImg = item.img
-                    this.currentStoryTitle = item.info
-                    this.currentItemId = item.id
-                }
-            })
-        },
+    methods: { 
         changeStorySidebar (index) {
-            this.storyItems.map((item, ind) => {
+            this.allUserStories.map((item, ind) => {
                 if(index === ind) {
-                    this.currentStoryImg = this.storyItems[index].img
-                    this.currentStoryTitle = this.storyItems[index].info
-                    this.currentItemId = this.storyItems[index].id
+                    this.currentStoryImg = this.allUserStories[index].imgUrl
+                    this.currentStoryTitle = this.allUserStories[index].createdBy
+                    this.currentItemId = index
                 }
             })
         },
         changeStoryNext () {
-            if(this.currentItemId < this.storyItems.length){
+            if(this.currentItemId < this.allUserStories.length){
                 this.currentItemId++
-                this.currentStoryImg = this.storyItems[this.currentItemId].img
-                this.currentStoryTitle = this.storyItems[this.currentItemId].info                
+                this.currentStoryImg = this.allUserStories[this.currentItemId].imgUrl
+                this.currentStoryTitle = this.allUserStories[this.currentItemId].createdBy                
             }
         },
         changeStoryPrevious () {
             if(this.currentItemId > 0){
                 this.currentItemId--
-                this.currentStoryImg = this.storyItems[this.currentItemId].img
-                this.currentStoryTitle = this.storyItems[this.currentItemId].info                
+                this.currentStoryImg = this.allUserStories[this.currentItemId].imgUrl
+                this.currentStoryTitle = this.allUserStories[this.currentItemId].createdBy                
             }
         },
     },
-beforeRouteEnter (to, from, next) { 
-  next(vm => { 
-    // access to component's instance using `vm` .
-    // this is done because this navigation guard is called before the component is created.            
-    // clear your previously populated search results.            
-    // re-populate search results
-    vm.getStoryItem();
-  }) 
-},
 mounted () {
     document.addEventListener("keydown", (event) => {
         if(event.code === 'ArrowRight') {
@@ -199,7 +166,7 @@ mounted () {
         if(event.code === 'Escape') {
             this.$router.push({ name: 'DashBoard' })
         }
-    })            
+    })               
 } 
 }
 </script>

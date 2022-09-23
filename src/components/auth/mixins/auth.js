@@ -27,7 +27,8 @@ const auth = {
                         userEmail: user.email,
                         userEmailVerified: user.emailVerified,
                         created_at: user.metadata.creationTime,
-                        lastLogin: user.metadata.lastSignInTime
+                        lastLogin: user.metadata.lastSignInTime,
+                        userImg: user.photoURL
                     })                          
                 }
                 this.loading = true

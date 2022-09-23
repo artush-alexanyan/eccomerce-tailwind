@@ -1,7 +1,7 @@
 <template>
     <div class="stories-user">
         <router-view></router-view> 
-        <div class="flex md:justify-between items-center my-4">
+        <div class="flex md:justify-center items-center my-4">
             <button 
                 type="button" 
                 class="rounded-full md:h-10 md:w-10 bg-gray-100 flex justify-center items-center ml-2 md:ml-5" 
@@ -11,31 +11,17 @@
                 <font-awesome-icon icon="fa-solid fa-chevron-left" class="text-gray-400" />
             </button>  
             <div 
-                class="card mx-2 relative" 
-                v-for="userSt in userStories" 
-                :key="userSt.createdBy"
-            >
-                <router-link :to="'/user-stories/' + userSt.createdBy">
-                    <div class="card-image cursor-pointer">
-                        <img :src="userSt.imgUrl" class="md:h-48 md:w-28 h-32 w-24 rounded-lg border border-gray-200" alt="">
-                    </div>                    
-                </router-link>
-                <div class="absolute text-xs bottom-2 left-1">
-                    <h6 class="font-extrabold text-white z-0">Norayr Tamazyan</h6>
-                </div>
-            </div>                              
-            <div 
-                class="card mx-2 relative" 
+                class="card mx-10 relative" 
                 v-for="story in storyIt" 
                 :key="story.img"
             >
-                <router-link :to="'/user-stories/' + story.info">
+                <router-link :to="'/user-stories/' + story.createdBy">
                     <div class="card-image cursor-pointer">
-                        <img :src="story.img" class="md:h-48 md:w-28 h-32 w-24 rounded-lg border border-gray-200" alt="">
+                        <img :src="story.imgUrl" class="md:h-48 md:w-28 h-32 w-24 rounded-lg border border-gray-200" alt="">
                     </div>                    
                 </router-link>
                 <div class="absolute text-xs bottom-2 left-1">
-                    <h6 class="font-extrabold text-white z-0">{{ story.info.substring(0, 15) }}</h6>
+                    <h6 class="font-extrabold text-white z-0">{{ story.createdBy }}</h6>
                 </div>
             </div>
             <button 
@@ -52,64 +38,55 @@
 </template>
 
 <script>
-import firebase from '../../firebase/firebase'
+// import firebase from '../../firebase/firebase'
 import UserStatus from '../../components/auth/mixins/authStatusCheck'
+import allStory from '../../mixins/getStoryItems'
+
 
 export default {
     name: 'UserStories',
-    mixins: [ UserStatus ],
+    mixins: [ UserStatus, allStory ],
     data: () => ({
         currentTab: 0,
         page: 0,
-        pageCount: 4,
-        storyItems: [
-            { img: require("../../assets/images/storyes/story-1.jpg"), info: 'Hovhannes Shiraz'},
-            { img: require("../../assets/images/storyes/story-2.jpg"), info: 'Khachatur Abovian'},
-            { img: require("../../assets/images/storyes/story-3.jpg"), info: 'Missak Manouchian '},
-            { img: require("../../assets/images/storyes/story-4.jpg"), info: 'Paruyr Sevak'},
-            { img: require("../../assets/images/storyes/story-5.png"), info: 'Sayat-Nova'},
-            { img: require("../../assets/images/storyes/story-6.jpg"), info: 'Vahan Terian'},
-            { img: require("../../assets/images/storyes/story-7.png"), info: 'Yeghishe Charents'},
-            { img: require("../../assets/images/storyes/story-8.jpg"), info: 'Misaq Metsarenc'},
-            { img: require("../../assets/images/storyes/story-9.jpg"), info: 'Derenik Demirchyan'},
-            { img: require("../../assets/images/storyes/story-10.jpg"), info: 'Vahram Alazan'},
-            { img: require("../../assets/images/storyes/story-11.jpg"), info: 'Khachik Dashtenc'},
-            { img: require("../../assets/images/storyes/story-12.jpg"), info: 'Avetiq Isahakyan'},
-            { img: require("../../assets/images/storyes/story-13.png"), info: 'Aqsel Bakunts'},            
-        ],
-        userStories: []     
+        pageCount: 2,
+        userStories: [],  
     }),
     methods: {
         changeStoryTab (index) {
            this.currentTab = index
         },
         nextStory () {
-            (this.page + this.pageCount) <= this.storyItems.length ? this.page+=this.pageCount : this.page
+            (this.page + this.pageCount) <= this.allUserStories.length ? this.page+=this.pageCount : this.page
        
         },
         previoustStory () {
             this.page >= this.pageCount ? this.page-=this.pageCount : this.page
         },
-        async getUserStoryes () {
-            // let docId = toString(this.userDetails.id)
-          await firebase.firestore().collection('Users').doc(this.userDetails.id).collection('UserStories').doc(this.userDetails.id)
-            .get().then(snapshot =>{
-                    const document = snapshot.data()
-                    console.log("Documents: ", document)
-                    this.userStories.push = document
-            })
-        }                
+        // getUserStoryes () {
+        //    firebase.auth().onAuthStateChanged(user => {
+        //     if(user){
+        //      firebase.firestore().collection('Users').doc(user.uid).collection('UserStories').doc(user.uid)
+        //         .get().then(snapshot =>{
+        //                 const document = snapshot.data()
+        //                 console.log("Documents: ", document)
+        //                 this.userStories.push(document)
+        //         })
+        //     }
+        //   })
+        // }                         
     },
     computed: {
         storyIt () {
-            return this.storyItems.slice(this.page, this.page + this.pageCount)
+            return this.allUserStories.slice(this.page, this.page + this.pageCount)
         },
         nextPageIconHide () {
-            return this.storyItems.length - this.page === this.storyItems.length % this.pageCount
+            return this.allUserStories.length - this.page === this.allUserStories.length % this.pageCount
         }
     },
     mounted () {
-        this.getUserStoryes()
+        // this.getUserStoryes()
+        this.getAllUserStories()
         document.addEventListener("keydown", (event) => {
             if(event.code === 'ArrowRight') {
                 this.changeStoryNext ()

@@ -315,11 +315,18 @@ export default {
             this.output = await this.$html2canvas(el, options)
             console.log("Output: ", this.output)            
             setTimeout(() => {
-                firebase.firestore().collection('Users').doc(this.userDetails.id).collection("UserStories").doc(this.userDetails.id).set({
+                firebase.firestore().collection('Users').doc(this.userDetails.id).collection("UserStories").doc().set({
                     createdBy: this.userDetails.userName,
                     id: this.userDetails.id,
-                    imgUrl: this.output
+                    imgUrl: this.output,
+                    userPhoto: this.userDetails.photo
                 })     
+                firebase.firestore().collection('AllUsersStoryes').doc().set({
+                    createdBy: this.userDetails.userName,
+                    id: this.userDetails.id,
+                    imgUrl: this.output,    
+                    userPhoto: this.userDetails.photo               
+                })
                 this.creatingStory = false
                 this.$router.push({ name: 'DashBoard' })
                 console.log("Story successfuly created!")                           
