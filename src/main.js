@@ -2,13 +2,13 @@ import Vue from 'vue'
 import App from './App.vue'
 import './assets/tailwind.css'
 import router   from './router/router'
-import VueHtml2Canvas from 'vue-html2canvas'
+// import VueHtml2Canvas from 'vue-html2canvas'
 import 'regenerator-runtime'
 
 
 Object.keys(null || {})
  
-Vue.use(VueHtml2Canvas)
+// Vue.use(VueHtml2Canvas)
 
 import {fas} from "@fortawesome/free-solid-svg-icons";
 

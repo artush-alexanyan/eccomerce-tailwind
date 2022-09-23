@@ -1,8 +1,8 @@
 <template>
     <div class="user-add-story h-screen w-full mt-14 fixed">
         <div class="flex justify-center">
-            <div class="sidebar w-[27.5%] h-full bg-white hidden lg:block">
-                <div class="sidebar-content-wrapper border-b pb-5">
+            <div class="sidebar w-[27.5%] h-auto bg-white hidden lg:block">
+                <div class="sidebar-content-wrapper border-b pb-2">
                     <div class="flex justify-start items-center py-3 mr-3">
                         <router-link to="/user-dashboard">
                             <button class="rounded-full h-10 w-10 flex items-center justify-center bg-gray-300 ml-4">
@@ -16,13 +16,13 @@
                             <font-awesome-icon icon="fa-solid fa-gear" class="text-xl" />
                         </button>
                     </div>
-                    <div class="flex justify-start items-center mt-5 mx-4">
+                    <div class="flex justify-start items-center mt-2 mx-4">
                         <img 
                             :src="userDetails.photo" 
                             alt="user-avatar" 
-                            class="rounded-full h-14 w-14"
+                            class="rounded-full lg:h-11 mb-1 lg:w-11"
                         >
-                        <h2 class="ml-4 text-lg font-base"> {{ userDetails.userName }} </h2>
+                        <h2 class="ml-2 text-lg font-base"> {{ userDetails.userName }} </h2>
                     </div>                    
                 </div>
                 <Transition name="bounce">
@@ -32,7 +32,7 @@
                         <!-- ----------- TEXTAREA -------------- -->
 
                         <textarea 
-                            class="border border-gray-200 rounded-lg w-full h-40 p-4 text-xl italic"
+                            class="border border-gray-200 rounded-lg w-full lg:h-20 p-4 text-xl italic"
                             v-model="text"
                             placeholder="Start typing"
                         ></textarea>
@@ -67,15 +67,15 @@
 
                         <!-- ----------- SELECT COLOR -------------- -->
 
-                        <div class="colors border border-gray-200 rounded-lg w-full h-40">
-                            <h4 class="text-gray-400 text-lg ml-3 mt-2">Background</h4>
+                        <div class="colors border border-gray-200 rounded-lg w-full h-30">
+                            <h4 class="text-gray-400 text-base ml-3 mt-2">Background</h4>
                             <div class="colored-buttons grid grid-cols-8 mt-3 mx-3">
                                 <div 
                                     v-for="(color, index) in colors" 
                                     :key="color.colorClass"
                                 >
                                 <button  
-                                    class="rounded-full h-8 w-8 mt-2 cursor-pointer" 
+                                    class="rounded-full h-4 w-4 mt-1 cursor-pointer" 
                                     :class="'bg-' + color.colorClass"   
                                     @click="selectBgColor(index)"                             
                                 >
@@ -86,15 +86,15 @@
                         </div>
 
 
-                        <div class="button fixed bottom-0 flex justify-start my-5 items-center">
+                        <div class="button fixed bottom-0 flex justify-start my-2 items-center">
                             <button 
-                                class="px-3 py-2 text-white rounded-lg bg-green" 
+                                class="px-2 py-1 text-white rounded-lg bg-green" 
                                 @click="showDiscardModal"
                             >
                                 Discard
                             </button>   
                             <button 
-                                class="px-3 py-2 ml-10 text-white rounded-lg bg-blue-500" 
+                                class="px-2 py-1 ml-10 text-white rounded-lg bg-blue-500" 
                                 @click="createStory"
                             >
                                 Share to story
