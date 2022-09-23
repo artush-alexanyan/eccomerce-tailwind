@@ -21,8 +21,12 @@
                 <h5 class="mt-4 ml-4 font-bold text-lg ">Your story</h5>
                 <div class="flex items-center justify-start mt-4">
                     <router-link to="/user/me/add-story">
-                        <button class="rounded-full h-20 w-20 flex items-center justify-center  ml-4 bg-gray-200">
-                            <font-awesome-icon icon="fa-solid fa-plus" :fade="fade" class="text-blue-500 text-xl" />
+                        <button class="rounded-full h-16 w-16 flex items-center justify-center  ml-4 bg-gray-200">
+                            <font-awesome-icon 
+                                icon="fa-solid fa-plus" 
+                                :fade="fade" 
+                                class="text-blue-500 text-xl" 
+                            />
                         </button>                        
                     </router-link>
                     <div class="ml-4">
@@ -62,10 +66,10 @@
            <div class="content h-full w-full lg:w-4/5 bg-black flex justify-center">
                 <div class="story-content relative">
                     <img :src="currentStoryImg" class="my-3 w-full md:w-[30rem] mx-auto rounded-lg h-[88%]" alt="story-image">
-                    <div class="flex items-center absolute top-4 left-10 text-white">
+                    <div class="flex items-center absolute top-6 left-16 text-white">
                         <div class="flex items-center justify-center ml-10">
                             <img :src="userDetails.photo" class="h-10 w-10 rounded-full" alt="">
-                            <h4 class="ml-2"> {{ currentStoryTitle }} </h4>                            
+                            <h4 class="ml-2 text-sm font-bold"> {{ currentStoryTitle }} </h4>                            
                         </div>
                     </div>
                     <div class="absolute top-[25rem] right-0">

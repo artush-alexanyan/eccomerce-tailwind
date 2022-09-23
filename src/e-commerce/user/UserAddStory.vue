@@ -2,7 +2,7 @@
     <div class="user-add-story h-screen w-full mt-14 fixed">
         <div class="flex justify-center">
             <div class="sidebar w-[27.5%] h-auto bg-white hidden lg:block">
-                <div class="sidebar-content-wrapper border-b pb-2">
+                <div class="sidebar-content-wrapper border-b border-gray-100 pb-2">
                     <div class="flex justify-start items-center py-3 mr-3">
                         <router-link to="/user-dashboard">
                             <button class="rounded-full h-10 w-10 flex items-center justify-center bg-gray-300 ml-4">
