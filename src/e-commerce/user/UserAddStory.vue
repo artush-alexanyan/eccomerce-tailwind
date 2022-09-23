@@ -1,7 +1,7 @@
 <template>
     <div class="user-add-story h-screen w-full mt-14 fixed">
         <div class="flex justify-center">
-            <div class="sidebar w-1/5 h-full bg-white hidden lg:block">
+            <div class="sidebar w-[27.5%] h-full bg-white hidden lg:block">
                 <div class="sidebar-content-wrapper border-b pb-5">
                     <div class="flex justify-start items-center py-3 mr-3">
                         <router-link to="/user-dashboard">

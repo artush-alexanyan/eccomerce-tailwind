@@ -50,7 +50,7 @@ export default {
     data: () => ({
         currentTab: 0,
         page: 0,
-        pageCount: 4,
+        pageCount: 5,
         userActions: [ 
             {id: 0, title: 'Stories'}, 
             {id: 1, title: 'Reels'}, 

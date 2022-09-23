@@ -4,14 +4,14 @@
         <div class="flex md:justify-center items-center my-4">
             <button 
                 type="button" 
-                class="rounded-full md:h-10 md:w-10 bg-gray-100 flex justify-center items-center ml-2 md:ml-5" 
+                class="rounded-full md:h-10 md:w-10 bg-gray-100 flex justify-center items-center ml-5" 
                 :class="page === 0 ? 'hidden' : ''"
                 @click="previoustStory"
             >
                 <font-awesome-icon icon="fa-solid fa-chevron-left" class="text-gray-400" />
             </button>  
             <div 
-                class="card mx-10 relative" 
+                class="card mx-2 relative" 
                 v-for="story in storyIt" 
                 :key="story.img"
             >
@@ -26,7 +26,7 @@
             </div>
             <button 
                 type="button" 
-                class="rounded-full md:h-10 md:w-10 h-7 w-7 bg-gray-100 flex justify-center items-center mr-2 md:mr-5" 
+                class="rounded-full md:h-10 md:w-10 h-7 w-7 bg-gray-100 flex justify-center items-center mr-5" 
                 :class="nextPageIconHide ? 'hidden' : ''"
                 @click="nextStory"
             >
@@ -49,7 +49,7 @@ export default {
     data: () => ({
         currentTab: 0,
         page: 0,
-        pageCount: 2,
+        pageCount: 4,
         userStories: [],  
     }),
     methods: {
