@@ -33,11 +33,11 @@ export default {
                 .auth()
                 .signOut()
                 .then(() => {
-                    console.log("Successfuly signed out")
+
                     this.showUserInfo = false
                     this.$router.push({ name: 'AppLogin' })
             })
-            .catch(err => console.log('Error during signout!', err))
+            .catch(err => alert('Error during signout!', err))
         }        
     }    
 }

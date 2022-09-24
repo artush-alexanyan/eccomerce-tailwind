@@ -16,9 +16,7 @@ export default {
     AppNavbar
   },
   methods: {
-    test(){
-      console.log("Router", this.$router)
-    }
+
   }
 }
 </script>

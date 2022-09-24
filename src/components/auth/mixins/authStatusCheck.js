@@ -17,7 +17,6 @@ const authStatus = {
             firebase.auth().onAuthStateChanged(user => {
                 if (user) {
                   // User is signed in.
-                  console.log("User  ",user)
                   this.userDetails.id = user.uid
                   this.isUserSigned = true
                   this.userDetails.userName = user.displayName
@@ -25,7 +24,6 @@ const authStatus = {
                   this.userDetails.photo = user.photoURL
                 } else {
                     this.isUserSigned = false
-                    console.log('User is signed out')
                 }
               });            
         }     

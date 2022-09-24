@@ -6,7 +6,7 @@ const allStory = {
     }),
     methods: {
         getAllUserStories () {
-            this.allUserStories = []
+            // this.allUserStories = []
             firebase.firestore().collection('AllUsersStoryes').get().then(querySnapshot => {
                 querySnapshot.forEach(doc => {
                     this.allUserStories.push(doc.data())
