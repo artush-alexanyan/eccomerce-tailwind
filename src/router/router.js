@@ -38,6 +38,16 @@ const router = new VueRouter({
 
         },
         {
+            path: '/user-view/:id',
+            name: 'SearchedUserView',
+            component: () => import('../e-commerce/user/SearchedUserView.vue')
+        },
+        {
+            path: '/all-users',
+            name: 'AllUsers',
+            component: () => import('../e-commerce/user/AllUsers.vue')
+        },        
+        {
             path: '/user/me/add-story',
             name: 'UserAddStory',
             component: () => import('../e-commerce/user/UserAddStory.vue')

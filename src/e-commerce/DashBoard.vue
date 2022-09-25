@@ -57,7 +57,6 @@ export default {
   components: { FbStory },
   data: () => ({
     showSidebar: true,
-    currentTime: "",
     sidebarItems: [
       {
         img: require("../assets/images/sidebar/sidebar-1.png"),
@@ -80,6 +79,14 @@ export default {
       { img: require("../assets/images/sidebar/sidebar-7.png"), info: "Pages" },
     ],
 }),
+  methods: {
+
+  },
+  // beforeRouteEnter(to, from, next) {
+  //   next(vm =>{
+  //     vm.loading = false
+  //   })
+  // }
 };
 </script>
 

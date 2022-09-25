@@ -59,7 +59,10 @@
             @click="onSearch = !onSearch"
           />
 
-          <div class="absolute p-4 w-48 text-center rounded-md mt-4 left-4 bg-white" v-show="onSearch === true && findUser.length === 0">
+          <div 
+              class="absolute p-4 w-48 text-center rounded-md mt-4 left-4 bg-white" 
+              v-show="onSearch === true && findUser.length === 0"
+            >
               <p class="text-blue-500">No search result</p>
           </div>
           <div class="absolute">
@@ -67,18 +70,22 @@
               class="mt-2 w-56 bg-white border border-gray-200 px-2 py-2 rounded-md"
               v-show="onSearch === true && findUser.length > 0"
             >
-              <li
-                class="py-2 flex items-center justify-between mx-3 cursor-pointer"
-                v-for="user in findUser"
-                :key="user.id"
-              >
-                <img
-                  :src="user.userImg"
-                  alt="user img"
-                  class="h-10 w-10 rounded-full"
-                />
-                <p>{{ user.userName }}</p>
-              </li>
+                <li
+                  class="py-2 flex items-center justify-between mx-3 cursor-pointer"
+                  @click="viewUser(index)"
+                  v-for="(user, index) in findUser"
+                  :key="user.id"                     
+                >
+                  <img
+                    :src="user.userImg"
+                    alt="user img"
+                    class="h-10 w-10 rounded-full"
+                  />
+                  <p>{{ user.userName }}</p>
+                </li>              
+                <router-link to="/all-users">
+                  <p class="my-2 text-blue-500 font-bold text-sm" @click="onSearch = false">View all</p>
+                </router-link>
             </ul>
           </div>
         </div>
@@ -340,10 +347,22 @@ export default {
           });
         });
     },
+    viewUser (index) {
+      this.allUsers.forEach((user, ind) => {
+        if(index === ind){
+          let param = this.allUsers[ind].id
+          this.onSearch = false
+          this.serchUsers = ""
+          console.log(param)
+          this.$router.push({ path: '/user-view/' + param })
+          setTimeout(() => {window.location.reload()}, 500)
+        }
+      })
+    },
     closeInput(e) {
       if (!this.$el.contains(e.target)) {
-        console.log(e);
-        this.onSearch = false;
+        this.onSearch = false
+        this.serchUsers = ''
       }
     },
   },
@@ -358,6 +377,7 @@ export default {
   },
   created() {
     this.getAllUsers();
+    this.viewUser()
   },
   mounted() {
     document.addEventListener("click", this.closeInput);

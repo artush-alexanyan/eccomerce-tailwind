@@ -81,13 +81,13 @@
         <div class="story-content relative">
           <img
             :src="currentStoryImg"
-            class="my-3 w-full md:w-[30rem] mx-auto rounded-lg h-[88%]"
+            class="my-3 w-full md:w-[30rem] mx-auto rounded-2xl h-[88%]"
             alt="story-image"
           />
           <div class="flex items-center absolute top-6 left-16 text-white">
             <div class="flex items-center justify-center ml-10">
               <img
-                :src="userDetails.photo"
+                :src="currentStoryCreator"
                 class="h-10 w-10 rounded-full"
                 alt=""
               />
@@ -133,7 +133,7 @@
 
 <script>
 import UserStatus from "../../components/auth/mixins/authStatusCheck"
-import allStory from "../../mixins/getStoryItems"
+import firebase from '../../firebase/firebase'
 
 export default {
   name: "StoryView",
@@ -143,21 +143,30 @@ export default {
       default: true,
     },
   },
-  mixins: [UserStatus, allStory],
+  mixins: [UserStatus],
   page: 0,
   data: () => ({
     currentStoryImg: "",
     currentStoryTitle: "",
     currentItemId: 0,
+    currentStoryCreator: '',
+    allUserStories: []
   }),
   methods: {
     getStarterData() {
-      this.allUserStories.forEach((item) => {
-        if (this.$route.params.id === item.id) {
-          (this.currentStoryImg = item.imgUrl),
-            (this.currentStoryTitle = item.createdBy)
-        }
-      })
+      this.allUserStories = []
+      firebase.firestore().collection('AllUsersStoryes').get().then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+              this.allUserStories.push(doc.data())
+          })
+          this.allUserStories.forEach((item) => {
+            if (this.$route.params.id === item.id) {
+              this.currentStoryCreator = item.userPhoto
+              this.currentStoryImg = item.imgUrl,
+              this.currentStoryTitle = item.createdBy
+            }
+          })           
+        })      
     },
 
     changeStorySidebar(index) {
@@ -165,6 +174,7 @@ export default {
         if (index === ind) {
           this.currentStoryImg = this.allUserStories[index].imgUrl
           this.currentStoryTitle = this.allUserStories[index].createdBy
+          this.currentStoryCreator = this.allUserStories[this.currentItemId].userPhoto
           this.currentItemId = index
         }
       })
@@ -173,41 +183,26 @@ export default {
       if (this.currentItemId < this.allUserStories.length) {
         this.currentItemId++
         this.currentStoryImg = this.allUserStories[this.currentItemId].imgUrl
-        this.currentStoryTitle =
-          this.allUserStories[this.currentItemId].createdBy
+        this.currentStoryTitle = this.allUserStories[this.currentItemId].createdBy
+        this.currentStoryCreator = this.allUserStories[this.currentItemId].userPhoto
       }
     },
     changeStoryPrevious() {
       if (this.currentItemId > 0) {
         this.currentItemId--
         this.currentStoryImg = this.allUserStories[this.currentItemId].imgUrl
-        this.currentStoryTitle =
-          this.allUserStories[this.currentItemId].createdBy
+        this.currentStoryCreator = this.allUserStories[this.currentItemId].userPhoto
+        this.currentStoryTitle = this.allUserStories[this.currentItemId].createdBy
       }
     },
   },
   beforeRouteEnter(to, from, next) {
-    next((vm) => {
+    next(vm => {
       vm.getStarterData()
-      console.log("Fuck!", vm.allUserStories)
     })
   },
   mounted() {
-    document.addEventListener("keydown", (event) => {
-      if (event.code === "ArrowRight") {
-        this.changeStoryNext()
-      }
-    }),
-      document.addEventListener("keydown", (event) => {
-        if (event.code === "ArrowLeft") {
-          this.changeStoryPrevious()
-        }
-      })
-    document.addEventListener("keydown", (event) => {
-      if (event.code === "Escape") {
-        this.$router.push({ name: "DashBoard" })
-      }
-    })
+
   },
 }
 </script>

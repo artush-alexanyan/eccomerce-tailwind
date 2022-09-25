@@ -1,6 +1,5 @@
 <template>
   <div class="stories-user">
-    <router-view></router-view>
     <div class="flex md:justify-center items-center my-4">
       <button
         type="button"
@@ -33,12 +32,10 @@
         <font-awesome-icon icon="fa-solid fa-chevron-right" class="text-gray-400" />
       </button>
     </div>
-    <h1 class="m-10 text-4">{{ $route.params.id }}</h1>
   </div>
 </template>
 
 <script>
-// import firebase from '../../firebase/firebase'
 import UserStatus from "../../components/auth/mixins/authStatusCheck";
 import allStory from "../../mixins/getStoryItems";
 
@@ -63,17 +60,6 @@ export default {
     previoustStory() {
       this.page >= this.pageCount ? (this.page -= this.pageCount) : this.page;
     },
-    // getUserStoryes () {
-    //    firebase.auth().onAuthStateChanged(user => {
-    //     if(user){
-    //      firebase.firestore().collection('Users').doc(user.uid).collection('UserStories').doc(user.uid)
-    //         .get().then(snapshot =>{
-    //                 const document = snapshot.data()
-    //                 this.userStories.push(document)
-    //         })
-    //     }
-    //   })
-    // }
   },
   computed: {
     storyIt() {
@@ -87,18 +73,7 @@ export default {
     },
   },
   mounted() {
-    // this.getUserStoryes()
     this.getAllUserStories();
-    document.addEventListener("keydown", (event) => {
-      if (event.code === "ArrowRight") {
-        this.changeStoryNext();
-      }
-    }),
-      document.addEventListener("keydown", (event) => {
-        if (event.code === "ArrowLeft") {
-          this.changeStoryPrevious();
-        }
-      });
   },
 };
 </script>

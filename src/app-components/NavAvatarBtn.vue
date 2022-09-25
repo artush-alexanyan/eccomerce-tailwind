@@ -66,7 +66,17 @@ export default {
             { title: 'Display & accessibility', icon: 'fa-solid fa-moon' },
             { title: 'Give feedback', icon: 'fa-solid fa-message' },
         ]
-    })    
+    }),
+    methods: {
+        closeDropdown(e) {
+            if (!this.$el.contains(e.target)) {
+                this.showUserInfo = false;
+            }
+        },        
+    },
+    mounted () {
+         document.addEventListener("click", this.closeDropdown);
+    }    
 }
 </script>
 
