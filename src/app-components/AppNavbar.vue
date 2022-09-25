@@ -71,7 +71,7 @@
               v-show="onSearch === true && findUser.length > 0"
             >
                 <li
-                  class="py-2 flex items-center justify-between mx-3 cursor-pointer"
+                  class="py-2 flex items-center justify-start mx-3 cursor-pointer"
                   @click="viewUser(index)"
                   v-for="(user, index) in findUser"
                   :key="user.id"                     
@@ -81,7 +81,7 @@
                     alt="user img"
                     class="h-10 w-10 rounded-full"
                   />
-                  <p>{{ user.userName }}</p>
+                  <p class="ml-4">{{ user.userName }}</p>
                 </li>              
                 <router-link to="/all-users">
                   <p class="my-2 text-blue-500 font-bold text-sm" @click="onSearch = false">View all</p>
@@ -112,210 +112,8 @@
         </div>
       </div>
       <div class="flex">
-        <div class="relative mx-2">
-          <button
-            class="rounded-full h-11 w-11 justify-center items-center bg-gray-100 lg:flex hidden"
-          >
-            <font-awesome-icon icon="fa-solid fa-bars" />
-          </button>
-          <div class="absolute right-0 w-96 mt-5 hidden">
-            <transition name="toggle-user-info">
-              <div
-                class="bg-white shadow-xl rounded py-2 border border-gray-200"
-              >
-                <ul>
-                  <li
-                    class="flex justify-start items-center py-3 px-3 cursor-pointer"
-                  >
-                    <div
-                      class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center"
-                    >
-                      <font-awesome-icon icon="fa-solid fa-message" />
-                    </div>
-                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                  </li>
-                  <li
-                    class="flex justify-start items-center py-3 px-3 cursor-pointer"
-                  >
-                    <div
-                      class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center"
-                    >
-                      <font-awesome-icon icon="fa-solid fa-message" />
-                    </div>
-                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                  </li>
-                  <li
-                    class="flex justify-start items-center py-3 px-3 cursor-pointer"
-                  >
-                    <div
-                      class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center"
-                    >
-                      <font-awesome-icon icon="fa-solid fa-message" />
-                    </div>
-                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                  </li>
-                  <li
-                    class="flex justify-start items-center py-3 px-3 cursor-pointer"
-                  >
-                    <div
-                      class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center"
-                    >
-                      <font-awesome-icon icon="fa-solid fa-message" />
-                    </div>
-                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                  </li>
-                  <li
-                    class="flex justify-start items-center py-3 px-3 cursor-pointer"
-                  >
-                    <div
-                      class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center"
-                    >
-                      <font-awesome-icon icon="fa-solid fa-message" />
-                    </div>
-                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                  </li>
-                </ul>
-                <div class="text-center my-3"></div>
-              </div>
-            </transition>
-          </div>
-        </div>
-        <div class="relative mx-2">
-          <button
-            class="rounded-full h-11 w-11 justify-center items-center bg-gray-100 lg:flex hidden"
-          >
-            <font-awesome-icon icon="fa-solid fa-message" />
-          </button>
-          <div class="absolute right-0 w-96 mt-5 hidden">
-            <transition name="toggle-user-info">
-              <div
-                class="bg-white shadow-xl rounded py-2 border border-gray-200"
-              >
-                <ul>
-                  <li
-                    class="flex justify-start items-center py-3 px-3 cursor-pointer"
-                  >
-                    <div
-                      class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center"
-                    >
-                      <font-awesome-icon icon="fa-solid fa-message" />
-                    </div>
-                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                  </li>
-                  <li
-                    class="flex justify-start items-center py-3 px-3 cursor-pointer"
-                  >
-                    <div
-                      class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center"
-                    >
-                      <font-awesome-icon icon="fa-solid fa-message" />
-                    </div>
-                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                  </li>
-                  <li
-                    class="flex justify-start items-center py-3 px-3 cursor-pointer"
-                  >
-                    <div
-                      class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center"
-                    >
-                      <font-awesome-icon icon="fa-solid fa-message" />
-                    </div>
-                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                  </li>
-                  <li
-                    class="flex justify-start items-center py-3 px-3 cursor-pointer"
-                  >
-                    <div
-                      class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center"
-                    >
-                      <font-awesome-icon icon="fa-solid fa-message" />
-                    </div>
-                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                  </li>
-                  <li
-                    class="flex justify-start items-center py-3 px-3 cursor-pointer"
-                  >
-                    <div
-                      class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center"
-                    >
-                      <font-awesome-icon icon="fa-solid fa-message" />
-                    </div>
-                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                  </li>
-                </ul>
-                <div class="text-center my-3"></div>
-              </div>
-            </transition>
-          </div>
-        </div>
-        <div class="relative mx-2">
-          <button
-            class="rounded-full h-11 w-11 justify-center items-center flex bg-gray-100 lg:block hidden"
-          >
-            <font-awesome-icon icon="fa-solid fa-bell" />
-          </button>
-          <div class="absolute right-0 w-96 mt-5 hidden">
-            <transition name="toggle-user-info">
-              <div
-                class="bg-white shadow-xl rounded py-2 border border-gray-200"
-              >
-                <ul>
-                  <li
-                    class="flex justify-start items-center py-3 px-3 cursor-pointer"
-                  >
-                    <div
-                      class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center"
-                    >
-                      <font-awesome-icon icon="fa-solid fa-message" />
-                    </div>
-                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                  </li>
-                  <li
-                    class="flex justify-start items-center py-3 px-3 cursor-pointer"
-                  >
-                    <div
-                      class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center"
-                    >
-                      <font-awesome-icon icon="fa-solid fa-message" />
-                    </div>
-                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                  </li>
-                  <li
-                    class="flex justify-start items-center py-3 px-3 cursor-pointer"
-                  >
-                    <div
-                      class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center"
-                    >
-                      <font-awesome-icon icon="fa-solid fa-message" />
-                    </div>
-                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                  </li>
-                  <li
-                    class="flex justify-start items-center py-3 px-3 cursor-pointer"
-                  >
-                    <div
-                      class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center"
-                    >
-                      <font-awesome-icon icon="fa-solid fa-message" />
-                    </div>
-                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                  </li>
-                  <li
-                    class="flex justify-start items-center py-3 px-3 cursor-pointer"
-                  >
-                    <div
-                      class="rounded-full bg-gray-100 h-10 w-10 border flex justify-center items-center"
-                    >
-                      <font-awesome-icon icon="fa-solid fa-message" />
-                    </div>
-                    <p class="text-sm font-bold mx-3">Lorem ipsum dolor sit.</p>
-                  </li>
-                </ul>
-                <div class="text-center my-3"></div>
-              </div>
-            </transition>
-          </div>
-        </div>
+        <AppMessageBtn />
+        <AppNotificationBtn />
         <NavAvatarBtn />
       </div>
     </div>
@@ -326,9 +124,11 @@
 import firebase from "../firebase/firebase";
 import UserStatus from "../components/auth/mixins/authStatusCheck";
 import NavAvatarBtn from "./NavAvatarBtn.vue";
+import AppNotificationBtn from "./AppNotificationBtn.vue";
+import AppMessageBtn from "./AppMessageBtn.vue";
 export default {
   name: "AppNavbar",
-  components: { NavAvatarBtn },
+  components: { NavAvatarBtn, AppNotificationBtn, AppMessageBtn },
   mixins: [UserStatus],
   data: () => ({
     serchUsers: "",

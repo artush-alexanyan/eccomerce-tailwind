@@ -22,7 +22,8 @@
                                     class="rounded-full h-10 w-10"
                                 >
                                 <h1 class="text-xl font-bold ml-5"> {{ userDetails.userName }} </h1>                                
-                            </div>                        </router-link>
+                            </div>                        
+                        </router-link>
                         <ul class="mt-5">
                             <li 
                                 class="flex justify-start items-center py-3 px-3 cursor-pointer" 

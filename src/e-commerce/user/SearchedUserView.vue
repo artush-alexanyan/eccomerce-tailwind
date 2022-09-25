@@ -12,13 +12,7 @@
                         src="../../assets/images/background-image.jpg" 
                         class="object-cover h-60 md:h-96 w-[60rem] rounded-lg" 
                         alt="user-background-image"
-                    >
-                    <div class="absolute md:bottom-4 top-2 md:right-8 right-2">
-                        <button class="rounded bg-white py-[0.45rem] md:px-3 px-2 flex items-center jutify-between shadow-lg">
-                            <font-awesome-icon icon="fa-solid fa-camera" />
-                            <p class="font-bold text-base ml-1">Edit cover photo</p>
-                        </button> 
-                    </div>                
+                    >              
                 </div>           
             </div>
             <!-- USER DETAILS SECTION -->
@@ -48,15 +42,30 @@
                                 </div>
                             </div>
                             <div class="flex justify-center mt-3 items-center">
-                                    <button class="rounded bg-blue-600 text-white py-[0.25rem] px-2 flex items-center jutify-between shadow-lg">
+                                    <button 
+                                        class="rounded bg-blue-600 text-white py-[0.25rem] px-2 flex items-center jutify-between shadow-lg"
+                                        @click="sendFriendRequest"
+                                        v-show="!isFriendRequestSent"
+                                    >
                                         <font-awesome-icon icon="fa-solid fa-plus" />
-                                        <p class="font-bold text-base ml-1">Add friend</p>
-                                    </button>  
-                                <button class="rounded ml-3 bg-gray-200 py-[0.25rem] px-2 flex items-center jutify-between shadow-lg">
-                                    <font-awesome-icon icon="fa-solid fa-pencil" />
-                                    <p class="font-bold text-base ml-1">Edit profile</p>
+                                        <p class="font-bold text-base ml-1">
+                                            Add friend
+                                        </p>
+                                    </button>
+                                    <button 
+                                        class="rounded bg-blue-500 text-white py-[0.25rem] px-2 flex items-center jutify-between shadow-lg"
+                                        @click="cancelFriendRequest"
+                                        v-show="isFriendRequestSent"
+                                    >
+                                        <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
+                                        <p class="font-bold text-base ml-1">
+                                            Request sent
+                                        </p>
+                                    </button>                                        
+                                <button class="rounded ml-3 bg-gray-200 py-[0.25rem] px-4 flex items-center jutify-between shadow-lg">
+                                    <p class="font-bold text-base">Follow</p>
                                 </button>         
-                                <button class="rounded ml-3 bg-gray-200 py-[0.25rem] px-2 flex items-center jutify-between shadow-lg md:hidden block">
+                                <button class="rounded ml-3 bg-gray-200 py-[0.25rem] px-2 flex items-center jutify-between shadow-lg md:hidden">
                                     <font-awesome-icon icon="fa-solid fa-ellipsis" />
                                 </button>                                                                                
                             </div>
@@ -79,9 +88,12 @@ export default {
     data: () => ({
         allUsers: [],
         currentUser: {
+            id: '',
             name: '',
             photo: ''
         },
+        currentUserDetails: null,
+        isFriendRequestSent: false,
         loading: false
     }),
     methods: {
@@ -99,16 +111,70 @@ export default {
                     if(user.id === this.$route.params.id) {
                         this.currentUser.name = user.userName
                         this.currentUser.photo = user.userImg
+                        this.currentUser.id = user.id
                     }
                     this.loading = false
                 })
             })            
-        }        
-    },
+        },
+        sendFriendRequest () {
+            firebase.auth().onAuthStateChanged(user => {
+                if(user) {
+                    console.log(user)
+                    firebase.firestore().collection('Users').doc(this.currentUser.id).collection('ReceivedFriendRequests').doc(user.uid).set({
+                        title: 'Freiend request',
+                        type: 'Received',
+                        status: 'pending',
+                        from: user.displayName,
+                        to: this.currentUser.name,
+                        fromId: user.uid,
+                        toIds: this.currentUser.id
+                    })
+                    firebase.firestore().collection('Users').doc(user.uid).collection('SentFriendRequests').doc(this.currentUser.id).set({
+                        title: 'Freiend request',
+                        type: 'Sent',
+                        status: 'pending',
+                        from: user.displayName,
+                        to: this.currentUser.name,
+                        fromId: user.uid,
+                        toIds: this.currentUser.id
+                    })                    
+                    .then(() => {
+                        console.log("Request sent to", this.currentUser.name)
+                        this.isFriendRequestSent = true            
+                    })
+                    .catch(err => console.log(err))
+                }
+            })            
+        },
+        getSentRequests () {
+            firebase.auth().onAuthStateChanged(user => {
+                if(user){
+                  firebase.firestore().collection('Users').doc(user.uid).collection('SentFriendRequests')
+                   .get().then(querySnapShot => {
+                        querySnapShot.forEach(doc => {
+                            if(doc.data().to === this.currentUser.name){
+                                this.isFriendRequestSent = true
+                            }
+                            
+                        })
+                    })
+                }
+            })
+        },
+        cancelFriendRequest () {
+            console.log("Request canceled")
+            this.isFriendRequestSent = false
+        },         
+    },                  
     beforeRouteEnter(to, from, next) {
         next(vm => {
             vm.getCurrentUserInfo()
+           vm.getSentRequests()
         })
+    },
+    created () {
+
     }
 }
 </script>
