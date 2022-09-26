@@ -22,11 +22,13 @@
 
         <div class="user-details flex justify-center">
             <div class="lg:flex lg:justify-start grid justify-items-center text-center md:text-start lg:w-6/12 md:w-8/12 w-full">
-                <img 
-                    :src="userDetails.photo" 
-                    class="rounded-full h-40 w-40 shadow-lg ml-5 mt-[-2.5rem] z-0"  
-                    alt="user-image"
-                >
+                <div class=" mt-[-2.5rem] z-0 h-[10.5rem] w-[10.5rem] border rounded-full border-bg-gray-50 flex items-center justify-center bg-white">
+                    <img 
+                        :src="userDetails.photo" 
+                        class="rounded-full h-40 w-40 shadow-lg"  
+                        alt="user-image"
+                    >                    
+                </div>
                 <div class="md:ml-10">
                     <h1 class="font-bold text-xl md:text-4xl mt-5"> 
                         {{ userDetails.userName }} 

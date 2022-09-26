@@ -19,11 +19,13 @@
 
             <div class="user-details flex justify-center">
                 <div class="lg:flex lg:justify-start grid justify-items-center text-center md:text-start lg:w-6/12 md:w-8/12 w-full">
-                    <img 
-                        :src="currentUser.photo" 
-                        class="rounded-full h-40 w-40 shadow-lg ml-5 mt-[-2.5rem] z-0"  
-                        alt="user-image"
-                    >
+                    <div class=" mt-[-2.5rem] z-0 h-[10.5rem] w-[10.5rem] border rounded-full border-bg-gray-50 flex items-center justify-center bg-white">
+                        <img 
+                            :src="currentUser.photo" 
+                            class="rounded-full h-40 w-40 shadow-lg"  
+                            alt="user-image"
+                        >
+                    </div>
                     <div class="md:ml-10">
                         <h1 class="font-bold text-xl md:text-4xl mt-5"> 
                             {{ currentUser.name }} 
@@ -45,13 +47,24 @@
                                     <button 
                                         class="rounded bg-blue-600 text-white py-[0.25rem] px-2 flex items-center jutify-between shadow-lg"
                                         @click="sendFriendRequest"
-                                        v-show="!isFriendRequestSent && isReceivedFriendRequest === false"
+                                        v-show="!isFriendRequestSent && isReceivedFriendRequest === false && isOwnProfileView === false"
                                     >
                                         <font-awesome-icon icon="fa-solid fa-plus" />
                                         <p class="font-bold text-base ml-1">
                                             Add friend
                                         </p>
                                     </button>
+                                    <router-link to="/user/me">
+                                        <button 
+                                            class="rounded bg-blue-600 text-white py-[0.25rem] px-2 flex items-center jutify-between shadow-lg"
+                                            v-show="isOwnProfileView === true"
+                                        >
+                                            <font-awesome-icon icon="fa-solid fa-plus" />
+                                            <p class="font-bold text-base ml-1">
+                                            View Profile
+                                            </p>
+                                    </button>                                     
+                                    </router-link>                                   
                                     <button 
                                         class="rounded bg-orange text-white py-[0.25rem] px-2 flex items-center jutify-between shadow-lg relative"
                                         v-show="isReceivedFriendRequest"
@@ -112,10 +125,12 @@ export default {
         isFriendRequestSent: false,
         isReceivedFriendRequest: false,
         isAccepted: false,
+        isOwnProfileView: false,
         loading: false
     }),
     methods: {
         getCurrentUserInfo () {
+            console.log("getCurrentUserInfo")
             this.loading = true
             firebase
                 .firestore()
@@ -131,6 +146,7 @@ export default {
                         this.currentUser.photo = user.userImg
                         this.currentUser.id = user.id
                     }
+                    this.ownProfileView ()
                     this.loading = false
                 })
             })            
@@ -191,6 +207,7 @@ export default {
             })
         },        
         getSentRequests () {
+            console.log("getSentRequests")
             firebase.auth().onAuthStateChanged(user => {
                 if(user){
                   firebase.firestore().collection('Users').doc(user.uid).collection('SentFriendRequests')
@@ -205,6 +222,7 @@ export default {
             })
         },
         getReceivedRequests () {
+             console.log("getReceivedRequests")
             firebase.auth().onAuthStateChanged(user => {
                 if(user){
                   firebase.firestore().collection('Users').doc(user.uid).collection('ReceivedFriendRequests')
@@ -218,7 +236,17 @@ export default {
                     })
                 }
             })
-        }, 
+        },
+        ownProfileView () {
+             console.log("ownProfileView")
+            firebase.auth().onAuthStateChanged(user => {
+                if(user ){
+                    if(user.displayName === this.currentUser.name){
+                        this.isOwnProfileView = true                        
+                    }
+                }
+            })
+        },         
     closeDrop(e) {
       if (!this.$el.contains(e.target)) {
         this.isAccepted = false
@@ -228,12 +256,13 @@ export default {
     beforeRouteEnter(to, from, next) {
         next(vm => {
             vm.getCurrentUserInfo()
-           vm.getSentRequests()
+            vm.getSentRequests()
         })
     },
     created () {
         this.getSentRequests()
         this.getReceivedRequests()
+        this.ownProfileView ()
         document.addEventListener("click", this.closeDrop);
     }
 }

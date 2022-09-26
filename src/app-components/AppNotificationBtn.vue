@@ -73,7 +73,6 @@ export default {
             if(user){
               firebase.firestore().collection('Users').doc(user.uid).collection('ReceivedFriendRequests').get().then(querySnapShot => {
                 querySnapShot.forEach(notific => {
-                  console.log(notific.data())
                   this.notifications.push(notific.data())
                 })
               })
