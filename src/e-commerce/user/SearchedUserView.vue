@@ -45,13 +45,29 @@
                                     <button 
                                         class="rounded bg-blue-600 text-white py-[0.25rem] px-2 flex items-center jutify-between shadow-lg"
                                         @click="sendFriendRequest"
-                                        v-show="!isFriendRequestSent"
+                                        v-show="!isFriendRequestSent && isReceivedFriendRequest === false"
                                     >
                                         <font-awesome-icon icon="fa-solid fa-plus" />
                                         <p class="font-bold text-base ml-1">
                                             Add friend
                                         </p>
                                     </button>
+                                    <button 
+                                        class="rounded bg-orange text-white py-[0.25rem] px-2 flex items-center jutify-between shadow-lg relative"
+                                        v-show="isReceivedFriendRequest"
+                                        @click="isAccepted = !isAccepted"
+                                    >
+                                        <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
+                                        <p class="font-bold text-base ml-1">
+                                            Requested
+                                        </p>
+                                    </button>
+                                    <div class="accept-f-request absolute mt-36 mr-20 w-32" v-show="isAccepted">
+                                        <ul class="bg-white px-3 py-2 rounded-lg border border-gray-50">
+                                            <li class="text-blue-600 font-bold py-2 cursor-pointer">Accept</li>
+                                            <li class="text-red font-bold py-2 cursor-pointer">Decline</li>
+                                        </ul>
+                                    </div>                                    
                                     <button 
                                         class="rounded bg-blue-500 text-white py-[0.25rem] px-2 flex items-center jutify-between shadow-lg"
                                         @click="cancelFriendRequest"
@@ -94,6 +110,8 @@ export default {
         },
         currentUserDetails: null,
         isFriendRequestSent: false,
+        isReceivedFriendRequest: false,
+        isAccepted: false,
         loading: false
     }),
     methods: {
@@ -120,7 +138,6 @@ export default {
         sendFriendRequest () {
             firebase.auth().onAuthStateChanged(user => {
                 if(user) {
-                    console.log(user)
                     firebase.firestore().collection('Users').doc(this.currentUser.id).collection('ReceivedFriendRequests').doc(user.uid).set({
                         title: 'Freiend request',
                         type: 'Received',
@@ -140,13 +157,39 @@ export default {
                         toIds: this.currentUser.id
                     })                    
                     .then(() => {
-                        console.log("Request sent to", this.currentUser.name)
                         this.isFriendRequestSent = true            
                     })
-                    .catch(err => console.log(err))
+                    .catch(err => alert(err))
                 }
             })            
         },
+        cancelFriendRequest () {
+            firebase.auth().onAuthStateChanged(user => {
+                if(user) {
+                firebase.firestore().collection('Users').doc(user.uid).collection('SentFriendRequests')
+                   .get().then(querySnapShot => {
+                        querySnapShot.forEach(doc => {
+                            if(doc.data().to === this.currentUser.name){
+                              doc.ref.delete()
+                            }
+                            
+                        })
+                    })
+                    .then(() => {
+                        this.isFriendRequestSent = false
+                    })
+                firebase.firestore().collection('Users').doc(this.currentUser.id).collection('ReceivedFriendRequests')
+                   .get().then(querySnapShot => {
+                        querySnapShot.forEach(doc => {
+                            if(doc.data().to === this.currentUser.name){
+                              doc.ref.delete()
+                            }
+                            
+                        })
+                    })                                     
+                }
+            })
+        },        
         getSentRequests () {
             firebase.auth().onAuthStateChanged(user => {
                 if(user){
@@ -156,16 +199,31 @@ export default {
                             if(doc.data().to === this.currentUser.name){
                                 this.isFriendRequestSent = true
                             }
-                            
                         })
                     })
                 }
             })
         },
-        cancelFriendRequest () {
-            console.log("Request canceled")
-            this.isFriendRequestSent = false
-        },         
+        getReceivedRequests () {
+            firebase.auth().onAuthStateChanged(user => {
+                if(user){
+                  firebase.firestore().collection('Users').doc(user.uid).collection('ReceivedFriendRequests')
+                   .get().then(querySnapShot => {
+                        querySnapShot.forEach(doc => {
+                            if(doc.data().from === this.currentUser.name){
+                                this.isReceivedFriendRequest = true
+
+                            }
+                        })
+                    })
+                }
+            })
+        }, 
+    closeDrop(e) {
+      if (!this.$el.contains(e.target)) {
+        this.isAccepted = false
+      }
+    },                         
     },                  
     beforeRouteEnter(to, from, next) {
         next(vm => {
@@ -174,7 +232,9 @@ export default {
         })
     },
     created () {
-
+        this.getSentRequests()
+        this.getReceivedRequests()
+        document.addEventListener("click", this.closeDrop);
     }
 }
 </script>

@@ -155,7 +155,7 @@ export default {
           this.serchUsers = ""
           console.log(param)
           this.$router.push({ path: '/user-view/' + param })
-          setTimeout(() => {window.location.reload()}, 500)
+          setTimeout(() => {window.location.reload()}, 100)
         }
       })
     },

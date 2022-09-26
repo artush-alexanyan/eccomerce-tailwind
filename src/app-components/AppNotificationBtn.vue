@@ -8,7 +8,9 @@
             <font-awesome-icon icon="fa-solid fa-bell" />
           </button>
           <div 
-            class="absolute bg-blue-600 font-bold text-white rounded-full h-5 flex items-center justify-center w-5 top-0 right-0"> 
+            class="absolute bg-blue-600 font-bold text-white rounded-full h-5 flex items-center justify-center w-5 top-0 right-0"
+            v-show="notifications.length > 0"
+          > 
               {{ notifications.length }} 
             </div>
           <div class="absolute right-[-3.5rem] w-[29rem] shadow-2xl mt-5 rounded-3xl" v-show="isNotifications">
